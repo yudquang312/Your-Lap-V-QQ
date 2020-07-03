@@ -12,7 +12,7 @@ const deleteProduct = async (req, res, next) => {
         const { id } = req.params;
         const productDelete = await Product.findOne({ _id: id, deleteAt: undefined }).lean();
         if (!productDelete) {
-            return next(new Error('USER_NOT_FOUND'));
+            return next(new Error('PRODUCT_NOT_FOUND'));
         }
         await Product.updateOne({ _id: id }, { $set: { deleteAt: new Date() } });
         return res.status(200).json({
@@ -22,7 +22,27 @@ const deleteProduct = async (req, res, next) => {
         next(e);
     }
 };
+const chaneAmount = async (req) => {
+    try {
+        const { id, amount } = req;
+        // const data = req.body;
+        // _.omitBy(data, _.isNull);
+        const existedOrder = await Product.findOne({ _id: id, deleteAt: undefined });
+        if (!existedOrder) {
+            return next(new Error('PRODUCT_NOT_FOUND'));
+        }
+        // const updateInfo = { $set: data };
+        const orderUpdate = await Product.updateOne({ _id: id, deleteAt: undefined }, { $set: { "amount": parseInt(existedOrder[0].amount) - amount } })
+        return res.status(200).json({
+            message: 'update successful',
+            data: orderUpdate,
+            data_update: updateInfo
+        });
 
+    } catch (e) {
+        return next(e);
+    }
+};
 const getProduct = async (req, res, next) => {
     try {
         const { id } = req.params;

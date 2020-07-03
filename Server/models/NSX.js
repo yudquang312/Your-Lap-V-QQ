@@ -3,7 +3,7 @@ const nsxSChema = new mongoose.Schema({
     name: {
         type: String,
         min: 10,
-        require:true
+        require: true
     },
     nation: {
         type: String,

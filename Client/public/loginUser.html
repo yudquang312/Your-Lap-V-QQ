@@ -40,9 +40,9 @@
 
                     <div class="auth-form__header">
                         <h3 class="auth-form__heading">Đăng nhập</h3>
-                        <a href="./registerUser.html"><span class="auth-form_switch-btn" id="pass-to-register">Đăng ký</span></a>
+                        <a class="none_decoration" href="./registerUser.html"><span class="auth-form_switch-btn" id="pass-to-register">Đăng ký</span></a>
                     </div>
-
+                    <span id="err" style="font-size: 16px; color: red;"></span>
                     <form class="auth-form__form" id="form2">
                         <div class="auth-form__group">
                             <input type="email" name="login_email" id="email" class="auth-form__input" placeholder="Nhập email của bạn" required>
@@ -95,14 +95,16 @@
         </div>
 
     </div>
+
+    <!-- <script src="./js/until.js"></script> -->
     <script type="text/javascript" src="./js/LoginAndRegister/loginandregister.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
 
     <script src="./js/handleLogin.js"></script>
     <script type="text/javascript" src="js/facebook-sdk.js"></script>
-    <script src="./js/until.js"></script>
 </body>
 
 </html>

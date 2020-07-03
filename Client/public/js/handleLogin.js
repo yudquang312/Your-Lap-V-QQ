@@ -8,6 +8,9 @@ if(token && userId || dataCT.status === 200) {
 $('.Login').click(function () {
 	login($('#email').val().trim(), $('#password').val().trim());
 });
+$('.auth-form__help-forgot').click(function () {
+	redirect('vetifyEmail.html');
+});
 
 
 async function login(email , password) {
@@ -20,8 +23,9 @@ async function login(email , password) {
 				password
 			}
         });
-        console.log(loginResponse);
-		if (loginResponse.status === 200) {
+		console.log(loginResponse);
+		
+		if (loginResponse.data.access_token) {
 			console.log(loginResponse);
 			// debugger;
 			const token = loginResponse.data.access_token;
@@ -36,7 +40,10 @@ async function login(email , password) {
 			console.log(token, userId, username )
 			return redirect(path? path: 'homepage.html');
 		}
-		return alert("Login not successfully");
+		else {
+			$('#err').html('Tài khoản hoặc mật khẩu không đúng');
+			return;
+		}
 	} catch (e) {
 		alert(e.response);
 	}

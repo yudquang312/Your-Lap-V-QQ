@@ -4,3 +4,10 @@
 .btn {
     min-width: 55px;
 }
+
+.table thead th {
+    vertical-align: top;
+}
+.footer-item__link.footer-item__link--none {
+    text-decoration: none;
+}

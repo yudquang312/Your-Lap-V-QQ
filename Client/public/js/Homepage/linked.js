@@ -1,7 +1,11 @@
 $(document).ready(function(){
    
     $('.header__cart-icon').click(() => {
-        redirect('cart.html')
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+        if(userId && token)
+            redirect('cart.html');
+        redirect('loginUser.html')
     })
     $('.fa-bell').click(()=> {
         redirect('notification.html')

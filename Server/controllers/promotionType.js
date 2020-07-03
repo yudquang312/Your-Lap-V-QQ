@@ -7,11 +7,11 @@ const randomstring = require("randomstring");
 const deletePromotionType = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const promotionTypeDelete = await PromotionType.findOne({_id: id}).lean();
+        const promotionTypeDelete = await PromotionType.findOne({_id: id, deleteAt: undefined}).lean();
         if (!promotionTypeDelete) {
             return next(new Error('PromotionType_NOT_FOUND'));
         }
-        await PromotionType.updateOne({ _id: id }, {data: {$set: { deleteAt: new Date() }}} );
+        await PromotionType.updateOne({ _id: id },  {$set: { deleteAt: new Date() }} );
         return res.status(200).json({
             message : 'delete PromotionType successful',
         });
@@ -104,7 +104,7 @@ const updatePromotionType = async (req, res, next) => {
         const { id } = req.params;
         const data = req.body;
         _.omitBy(data, _.isNull);
-        const existedPromotionType = await PromotionType.findOne({ _id: id });
+        const existedPromotionType = await PromotionType.findOne({ _id: id, deleteAt: undefined });
         if (!existedPromotionType) {
             return next(new Error('PromotionType_NOT_FOUND'));
         }

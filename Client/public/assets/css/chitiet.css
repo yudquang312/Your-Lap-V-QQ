@@ -55,6 +55,7 @@ ul.hom-page__list>li.home-path__item:first-child >a.home-page__link>i.home-path_
     overflow: hidden;
     background-color: var(--white-color);
     box-sizing: border-box;
+    padding: 20px;
 }
 .detail-product__img {
     width: 450px;

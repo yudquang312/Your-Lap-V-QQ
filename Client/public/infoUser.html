@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+   
 </head>
 
 <body>
@@ -112,7 +113,7 @@
                             <li class="header__navbar-item header__navbar-item--bold">Đăng nhập</li> -->
                         <!-- ----- Khi đã đăng nhập thì mở phần dưới này------- ---------------->
                         <li class="header__navbar-item header__navbar-user">
-                            <img src="https://yt3.ggpht.com/a-/AOh14GipqfexOZj7ZjGVROd29XTD08hyTx28Gl7dC5IP=s88-c-k-c0xffffffff-no-rj-mo"
+                            <!-- <img src="https://yt3.ggpht.com/a-/AOh14GipqfexOZj7ZjGVROd29XTD08hyTx28Gl7dC5IP=s88-c-k-c0xffffffff-no-rj-mo"
                                 alt="photo" class="header__navbar-user-img">
                             <span class="header__navbar-user-name">Anh Lâm</span>
                             <ul class="header__navbar-user-menu">
@@ -127,7 +128,7 @@
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="#">Đăng xuất</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
@@ -181,15 +182,15 @@
                     <div class="header__cart">
                         <div class="header__cart-wrap">
                             <i class="header__cart-icon fas fa-shopping-cart"></i>
-                            <span class="header__cart-notice">3</span>
+                            <span class="header__cart-notice">0</span>
                             <!-- While no cart : add class header__cart-list--no-cart -->
                             <div class="header__cart-list ">
-                                <img src="./assets/img/noCart.png" alt="No-cart" class="header__cart-no-cart-img">
+                                <!-- <img src="./assets/img/noCart.png" alt="No-cart" class="header__cart-no-cart-img">
                                 <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
                                 <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                <ul class="header__cart-list-item">
+                                <ul class="header__cart-list-item"> -->
                                     <!-- Cart item -->
-                                    <li class="header__cart-item">
+                                    <!-- <li class="header__cart-item">
                                         <img src="https://cdn.tgdd.vn/Products/Images/44/106875/apple-macbook-air-mqd32sa-a-i5-5350u-600x600.jpg"
                                             alt="Photo" class="header__cart-img">
                                         <div class="header__cart-item-info">
@@ -242,8 +243,8 @@
                                                 <span class="header__cart-item-btnremove">Xóa</span>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
+                                    </li> 
+                                </ul>-->
                                 <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                             </div>
                         </div>
@@ -271,7 +272,7 @@
                                 <div class="auth-form__group">
                                     <label class="info_user_label" for="user_name">Tên Khách Hàng</label>
                                     <input spellcheck="false" id="user_name" name="info_name" type="text"
-                                        class="auth-form__input" value="Lê Anh Lâm">
+                                        class="auth-form__input" value="">
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>Error message</small>
@@ -279,12 +280,12 @@
                                 <div class="auth-form__group">
                                     <label class="info_user_label" for="user_email">Email</label>
                                     <input type="text" name="info_email" id="user_email" class="auth-form__input"
-                                        disabled value="leanhlamit@gmail.com">
+                                        disabled value="">
                                 </div>
                                 <div class="auth-form__group">
                                     <label class="info_user_label" for="user_sdt">Số Điện Thoại</label>
                                     <input type="text" id="user_sdt" name="info_sdt" class="auth-form__input"
-                                        value="0393347568">
+                                        value="">
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>Error message</small>
@@ -293,22 +294,22 @@
                                     <label class="info_user_label" for="">Giới Tính</label>
                                     <div class="info_user_gender">
                                         <input id="male" type="radio" name="gender" class="auth-form__input input_radio"
-                                            value="nam" checked>
+                                            value="Male">
                                         <label class="info_user_label" for="male">Nam</label>
                                         <input id="female" type="radio" name="gender"
-                                            class="auth-form__input input_radio" value="nữ">
+                                            class="auth-form__input input_radio" value="Female">
                                         <label class="info_user_label" for="female">Nữ</label>
                                     </div>
                                 </div>
                                 <div class="auth-form__group">
                                     <label class="info_user_label" for="user_date">Ngày Sinh</label>
                                     <input type="date" id="user_date" name="info_birthday" class="auth-form__input"
-                                        value="1999-11-17">
+                                        value="">
                                 </div>
                                 <div class="auth-form__group">
                                     <label class="info_user_label" for="user_address">Địa chỉ</label>
                                     <input spellcheck="false" name="info_address" id="user_address" type="text"
-                                        class="auth-form__input" value="08 Hà Văn Tín, TP. Đà Nẵng">
+                                        class="auth-form__input" value="">
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>Error message</small>
@@ -316,7 +317,7 @@
                                 <div class="auth-form__group">
                                     <label class="info_user_label" for="user_registration_date">Ngày Đăng ký</label>
                                     <input type="date" name="info_registration_date" id="user_registration_date"
-                                        class="auth-form__input" value="2020-02-02" disabled>
+                                        class="auth-form__input" value="" disabled>
                                 </div>
                                 <div class="auth-form__group group_change_password checkbox">
                                     <label class="info_user_label" for=""></label>
@@ -357,8 +358,10 @@
                                     </div>-->
                                 </div> 
                                 <div class="auth-form__group group_change_password">
-                                    <button type="submit" class="btn btn--primary">Cập Nhật</button>
+                                    <button type="submit" class="btn btn--primary update">Cập Nhật</button>
                                 </div>
+                                <div id="succ" style="color: green; font-size: 16px;"></div>
+                                <div id="err" style="color: red; font-size: 16px;"></div>
                             </form>
                             
                         </div>
@@ -460,7 +463,16 @@
             </div>
         </footer>
     </div>
+    <!-- <script src="./js/jquery.min.js"></script> -->
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/until.js"></script>
     <script src="./js/infoUser/validateInfoUser.js"></script>
+    <script src="./js/LoadCart.js"></script>
+    <script src="./js/Homepage/LoadUser.js"></script>
+    <script src="./js/infoUser/LoadInfo.js"></script>
+    <script src="./js/infoUser/HandleUpdate.js"></script>
+    
 </body>
 
 </html>

@@ -6,11 +6,11 @@ const bcrypt = require('bcrypt-nodejs');
 const deletePT = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const PTDelete = await ProductType.findOne({_id: id}).lean();
+        const PTDelete = await ProductType.findOne({_id: id, deleteAt: undefined}).lean();
         if (!PTDelete) {
             return next(new Error('PRODUCT_TYPE_NOT_FOUND'));
         }
-        await ProductType.updateOne({ _id: id }, {data: {$set: { deleteAt: new Date() }}} );
+        await ProductType.updateOne({ _id: id },  {$set: { deleteAt: new Date() }});
         return res.status(200).json({
             message : 'delete product type successful',
         });

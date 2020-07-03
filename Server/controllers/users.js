@@ -7,6 +7,7 @@ const { sign, verify } = require('../helper/jwt-helper');
 const randomstring = require('randomstring');
 const sendMail = require('../helper/mailer');
 const axios = require('axios');
+
 const deleteUser = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -19,7 +20,7 @@ const deleteUser = async (req, res, next) => {
             message: 'delete user successful',
         });
     } catch (e) {
-        next(e);
+        return next(e);
     }
 };
 
@@ -33,7 +34,7 @@ const getUser = async (req, res, next) => {
             user
         })
     } catch (e) {
-        next(e);
+        return next(e);
     }
 }
 
@@ -45,22 +46,33 @@ const getAllUser = async (req, res, next) => {
             listUser
         })
     } catch (e) {
-        next(e)
+        return next(e)
     }
 }
+
 const createUser = async (req, res, next) => {
     try {
         const data = req.body;
+        console.log(data)
         const salt = bcrypt.genSaltSync(2);
         console.log(data);
         const checkUser = await User.findOne({ email: data.email });
         if (checkUser) {
             return next(new Error('Email is already in use'))
         }
+        const code = randomstring.generate({
+            length: 6,
+            charset: 'alphanumeric',
+            capitalization: 'uppercase'
+        });
+
         const hashPassword = bcrypt.hashSync(data.password, salt);
         data.password = hashPassword;
+        data.verifyCode = code;
+        data.verifyCodeExpiredAt = new Date();
         const createdUser = await User.create(data);
         if (createUser) {
+            await sendMail(data.email, `Ma xac thuc cua ban la : ` + code);
             const user = await User.findOne({ email: data.email })
             const cart = {
                 user: user._id,
@@ -73,7 +85,7 @@ const createUser = async (req, res, next) => {
             createdUser
         });
     } catch (e) {
-        next(e);
+        return next(e);
     }
 }
 
@@ -81,13 +93,13 @@ const updateUser = async (req, res, next) => {
     try {
         const { id } = req.params;
         const data = req.body;
-        if (data.password) {
-            const salt = bcrypt.genSaltSync(2);
-            const hashPassword = bcrypt.hashSync(data.password, salt);
-            data.password = hashPassword;
-        }
+        // if(data.password) {
+        //     const salt = bcrypt.genSaltSync(2);
+        //     const hashPassword = bcrypt.hashSync(data.password, salt);
+        //     data.password = hashPassword;
+        // }
         _.omitBy(data, _.isNull);
-        const existedUser = await User.findOne({ _id: id });
+        const existedUser = await User.findOne({ _id: id, deleteAt: undefined }).lean();
         if (!existedUser) {
             return next(new Error('USER_NOT_FOUND'));
         }
@@ -107,40 +119,84 @@ const updateUser = async (req, res, next) => {
     }
 };
 
+const changePassword = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const { newPw, oldPw } = req.body;
+        const user = await User.findOne({ _id: id, deleteAt: undefined }).lean();
+        if (!user) {
+            return next(new Error('USER_NOT_FOUND'));
+        }
+        console.log(user)
+        const isValidatePassword = bcrypt.compareSync(oldPw, user.password);
+        console.log(isValidatePassword)
+        if (!isValidatePassword) {
+            return next(new Error('PASSWORD_IS_INCORRECT'));
+        }
+        const salt = bcrypt.genSaltSync('10');
+        const hashPassword = bcrypt.hashSync(newPw, salt);
+        const updateUser = await User.updateOne({ _id: id, deleteAt: undefined }, { password: hashPassword }).lean();
+        return res.status(200).json({
+            message: 'update password success',
+            data: updateUser
+        })
+    } catch (e) {
+        return next(e);
+    }
+}
+
+const verifyEmail = async (req, res, next) => {
+    try {
+        const { email, code } = req.body;
+        const user = await User.findOne({ email: email, deleteAt: undefined }).select('verifyCode verifyCodeExpiredAt').lean();
+        if (!user) {
+            return next(new Error('EMAIL_NOT_INVALID'));
+        }
+        if (user.verifyCode === null) {
+            return next(new Error('YOU_HAVE_NOT_REQUESTED_VERIFY_EMAIL'));
+        }
+        if (code !== user.verifyCode) {
+            return next(new Error('CODE_NOT_INVALID'));
+        }
+        if (new Date() - user.verifyCodeExpiredAt > 1000 * 60 * 10) {
+            return next(new Error('CODE_EXPIRED'));
+        }
+        const update = await User.updateOne({ email, deleteAt: undefined }, { verifyCode: undefined });
+        return res.status(200).json({
+            message: 'update successful',
+            data: update
+        });
+    } catch (e) {
+        return next(new Error(e));
+    }
+};
+
+const sendCode = async (req, res, next) => {
+    try {
+        const { email } = req.body;
+        const code = randomstring.generate({
+            length: 6,
+            charset: 'alphanumeric',
+            capitalization: 'uppercase'
+        });
+        await sendMail(email, `Ma xac thuc cua ban la : ` + code);
+        const data = await User.updateOne({ email }, { verifyCode: code, verifyCodeExpiredAt: new Date() });
+        return res.status(200).json({
+            message: 'We have sent the code',
+            data
+        });
+    } catch (e) {
+        return next(new Error(e));
+    }
+}
+
 const login = async (req, res, next) => {
     try {
         const data = req.body;
         const salt = bcrypt.genSaltSync('10');
         const hashPassword = bcrypt.hashSync(data.password, salt);
         // const password = hashPassword;
-        const user = await User.findOne({ email: data.email });
-        if (!user) {
-            // return next(new Error('USERNAME_NOT_EXISTED'));
-            return next(new Error('USER_NOT_FOUND'));
-        }
-        const isValidatePassword = bcrypt.compareSync(data.password, user.password);
-        if (!isValidatePassword) {
-            return next(new Error('PASSWORD_IS_INCORRECT'));
-        }
-        console.log(user)
-        const token = sign({ _id: user._id });
-        return res.status(200).json({
-            message: "login successfully",
-            access_token: token,
-            userId: user._id,
-            username: user.fullname,
-        });
-    } catch (e) {
-        return next(e);
-    }
-};
-const loginAdmin = async (req, res, next) => {
-    try {
-        const data = req.body;
-        const salt = bcrypt.genSaltSync('10');
-        const hashPassword = bcrypt.hashSync(data.password, salt);
-        // const password = hashPassword;
-        const user = await User.findOne({ email: data.email, type: 'admin' });
+        const user = await User.findOne({ email: data.email, deleteAt: undefined, verifyCode: null });
         if (!user) {
             // return next(new Error('USERNAME_NOT_EXISTED'));
             return next(new Error('USER_NOT_FOUND'));
@@ -162,6 +218,33 @@ const loginAdmin = async (req, res, next) => {
     }
 };
 
+const loginAdmin = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const salt = bcrypt.genSaltSync('10');
+        const hashPassword = bcrypt.hashSync(data.password, salt);
+        // const password = hashPassword;
+        const user = await User.findOne({ email: data.email, type: 'admin', deleteAt: undefined, });
+        if (!user) {
+            // return next(new Error('USERNAME_NOT_EXISTED'));
+            return next(new Error('USER_NOT_FOUND'));
+        }
+        const isValidatePassword = bcrypt.compareSync(data.password, user.password);
+        if (!isValidatePassword) {
+            return next(new Error('PASSWORD_IS_INCORRECT'));
+        }
+        console.log(user)
+        const token = sign({ _id: user._id });
+        return res.status(200).json({
+            message: "login successfully",
+            access_token: token,
+            userId: user._id,
+            username: user.fullname,
+        });
+    } catch (e) {
+        return next(e);
+    }
+};
 
 const geUserWithToken = async (req, res, next) => {
     try {
@@ -211,10 +294,11 @@ const loginFB = async (req, res, next) => {
         return next(e);
     }
 };
+
 const forgetPassword = async (req, res, next) => {
     try {
         const { email } = req.body;
-        const existedEmail = await User.findOne({ email: email });
+        const existedEmail = await User.findOne({ email: email, deleteAt: undefined });
         if (!existedEmail) {
             return next(new Error('EMAIL_OF_USER_NOT_FOUND'));
         }
@@ -239,7 +323,7 @@ const forgetPassword = async (req, res, next) => {
 const resetPassword = async (req, res, next) => {
     try {
         const { email, code, newPassword } = req.body;
-        const user = await User.getOne({ email: email }).select('verifyCode verifyCodeExpiredAt').lean();
+        const user = await User.findOne({ email: email }).select('verifyCode verifyCodeExpiredAt').lean();
         if (!user) {
             return next(new Error('EMAIL_NOT_INVALID'));
         }
@@ -254,7 +338,7 @@ const resetPassword = async (req, res, next) => {
         }
         const salt = bcrypt.genSaltSync(2);
         const hashPassword = bcrypt.hashSync(newPassword, salt);
-        await userRepository.updateOne({ email }, { password: hashPassword, verifyCode: undefined });
+        await User.updateOne({ email }, { password: hashPassword, verifyCode: undefined });
         return res.status(200).json({
             message: 'change password successful',
         });
@@ -273,5 +357,9 @@ module.exports = {
     geUserWithToken,
     forgetPassword,
     resetPassword,
-    loginFB
+    loginFB,
+    loginAdmin,
+    verifyEmail,
+    sendCode,
+    changePassword
 }

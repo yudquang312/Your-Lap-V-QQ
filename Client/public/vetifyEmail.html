@@ -44,13 +44,18 @@
                     <div class="auth-form__header">
                         <h3 class="auth-form__heading">Xác Nhận Email</h3>
                     </div>
-
+                    <div style="color: green; font-size: 16px;" id="succ"></div>
+                    <div style="color: red; font-size: 16px;" id="err"></div>
                     <form class="auth-form__form" id="form1">
                         <div class="auth-form__group">
-                            <input type="text" name="vetify_email" id="vetify" class="auth-form__input" placeholder="Nhập mã xác nhận từ email" required>
+                            <input type="text" name="vetify_email" id="vetify" class="auth-form__input" maxlength="6" placeholder="Nhập mã xác nhận từ email" required>
+                            <button form="form1" id="send" class="btn btn--primary auth-form__controls-back">GỬI LẠI</button>
+                            <!-- <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small> -->
                         </div>
                         <div class="auth-form__controls">
-                            <button form="form1" class="btn btn--primary auth-form__controls-back">XÁC NHẬN</button>
+                            <button form="form1" id="verify" class="btn btn--primary auth-form__controls-back">XÁC NHẬN</button>
                         </div>
                     </form>
 
@@ -64,9 +69,15 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
 
-    <script src="./js/handleLogin.js"></script>
+    <!-- <script src="./js/handleLogin.js"></script> -->
+    <script src="./js/Register/verifyEmail.js"></script>
     <script type="text/javascript" src="js/facebook-sdk.js"></script>
-    <script src="./js/until.js"></script>
+    <!-- <script src="./js/until.js"></script> -->
+    <script >
+        // $('.auth-form__controls-back').click(() => {
+        //     const 
+        // })
+    </script>
 </body>
 
 </html>

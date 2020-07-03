@@ -7,11 +7,11 @@ const randomstring = require("randomstring");
 const deleteOrderDetail = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const OrderDetailDelete = await OrderDetail.findOne({_id: id}).lean();
+        const OrderDetailDelete = await OrderDetail.findOne({_id: id, deleteAt: undefined}).lean();
         if (!OrderDetailDelete) {
             return next(new Error('OrderDetail_NOT_FOUND'));
         }
-        await OrderDetail.updateOne({ _id: id }, {data: {$set: { deleteAt: new Date() }}} );
+        await OrderDetail.updateOne({ _id: id }, {$set: { deleteAt: new Date() }} );
         return res.status(200).json({
             message : 'delete OrderDetail successful',
         });
@@ -23,11 +23,14 @@ const deleteOrderDetail = async (req, res, next) => {
 const getOrderDetail = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const OrderDetail = await OrderDetail.findOne({_id: id, deleteAt: undefined}).lean();
-        if(!OrderDetail) return next(new Error('OrderDetail_NOT_FOUND'));
+        const orderDetail = await OrderDetail.findOne({order: id, deleteAt: undefined}).lean().populate({
+            path: 'order'
+        });
+        console.log(orderDetail)
+        if(!orderDetail) return next(new Error('OrderDetail_NOT_FOUND'));
         return res.status(200).json({
-            message: 'OrderDetail',
-            OrderDetail
+            message: 'OrderDetail', 
+            orderDetail
         })
     } catch (e) {
         next(e);
@@ -82,10 +85,11 @@ const createOrderDetail = async (req, res, next) => {
     try {
         const data = req;
         const createdOrderDetail = await OrderDetail.create(data);
-        return res.status(200).json({
-            message: "create OrderDetail successfully",
-            createdOrderDetail
-        });
+        // return res.status(200).json({
+        //     message: "create OrderDetail successfully",
+        //     createdOrderDetail
+        // });
+        return createOrderDetail;
     } catch (e) {
         next(e);
     }
@@ -96,7 +100,7 @@ const updateOrderDetail = async (req, res, next) => {
         const { id } = req.params;
         const data = req.body;
         _.omitBy(data, _.isNull);
-        const existedOrderDetail = await OrderDetail.findOne({ _id: id });
+        const existedOrderDetail = await OrderDetail.findOne({ _id: id, deleteAt: undefined });
         if (!existedOrderDetail) {
             return next(new Error('OrderDetail_NOT_FOUND'));
         }

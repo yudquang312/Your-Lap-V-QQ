@@ -39,14 +39,14 @@ async function loadUser() {
             alt="photo" class="header__navbar-user-img">
             <span class="header__navbar-user-name">${dataCT.data.user.fullname}</span>
                 <ul class="header__navbar-user-menu">
-                    <li class="header__navbar-user-item">
+                    <li class="header__navbar-user-item account">
                         <a href="#">Tài khoản của tôi</a>
                     </li>
                     <li class="header__navbar-user-item">
                         <a href="#">Địa chỉ của tôi</a>
                     </li>
                     <li class="header__navbar-user-item">
-                        <a href="#">Đơn mua</a>
+                        <a href="http://localhost:3000/donhangOfOneUser.html">Đơn mua</a>
                     </li>
                     <li class="header__navbar-user-item header__navbar-user-item--separate">
                         <a href="#">Đăng xuất</a>
@@ -54,6 +54,9 @@ async function loadUser() {
                 </ul>
             `
         )
+        $('.account').click(() => {
+            redirect('infoUser.html')
+        })
         $('.header__navbar-user-item--separate').click(()=> {
             localStorage.removeItem('token');
             localStorage.removeItem('userId');

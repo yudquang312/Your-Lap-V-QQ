@@ -108,6 +108,7 @@ async function loadProduct() {
     `)
     console.log($('.quantity-input').val());
     $(`.id-${product.data.product._id}`).click(() => {
+        const userId = localStorage.getItem('userId');
         if(!userId) {
             localStorage.setItem('path', `chitiet.html?id=${product.data.product._id}`);
             redirect('loginUser.html')

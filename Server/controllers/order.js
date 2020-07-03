@@ -8,11 +8,11 @@ const bcrypt = require('bcrypt-nodejs');
 const deleteOrder = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const orderDelete = await Order.findOne({_id: id}).lean();
+        const orderDelete = await Order.findOne({_id: id, deleteAt: undefined}).lean();
         if (!orderDelete) {
             return next(new Error('Order_NOT_FOUND'));
         }
-        await Order.updateOne({ _id: id }, {data: {$set: { deleteAt: new Date() }}} );
+        await Order.updateOne({ _id: id }, {$set: { deleteAt: new Date() }} );
         return res.status(200).json({
             message : 'delete order successful',
         });
@@ -25,6 +25,21 @@ const getOrder = async (req, res, next) => {
     try {
         const {id} = req.params;
         const order = await Order.findOne({_id: id, deleteAt: undefined}).lean().populate({
+            path: 'user'
+        });
+        if(!order) return next(new Error('order_NOT_FOUND'));
+        return res.status(200).json({
+            message: 'Order',
+            order
+        })
+    } catch (e) {
+        next(e);
+    }
+}
+const getOrderWithUser = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const order = await Order.find({user: id, deleteAt: undefined}).lean().populate({
             path: 'user'
         });
         if(!order) return next(new Error('order_NOT_FOUND'));
@@ -100,11 +115,15 @@ const createOrder = async (req, res, next) => {
     try {
         const {recipientName, recipientPhone, recipientAddress, products} = req.body;
         const user = req.user._id;
+        const total = products.reduce((a,b) => {
+            return a + b.price * b.amount
+        },0)
         const order = {
             recipientName,
             recipientPhone,
             recipientAddress,
-            user
+            user,
+            total
         }
         const createdOrder = await Order.create(order);
 
@@ -112,8 +131,11 @@ const createOrder = async (req, res, next) => {
             order: createdOrder._id,
             products,
         }
-        await createOrderDetail(detail, res,next);
-        await resetCart({userId: user}, res,next);
+        await createOrderDetail(detail);
+        await resetCart({userId: user});
+        // products.map((pr) => {
+        //     await
+        // })
         return res.status(200).json({
             message: "create Order successfully",
             createdOrder
@@ -128,7 +150,7 @@ const updateOrder = async (req, res, next) => {
         const { id } = req.params;
         const data = req.body;
         _.omitBy(data, _.isNull);
-        const existedOrder = await Order.findOne({ _id: id });
+        const existedOrder = await Order.findOne({ _id: id, deleteAt: undefined});
         if (!existedOrder) {
             return next(new Error('Order_NOT_FOUND'));
         }
@@ -153,5 +175,6 @@ module.exports = {
     getOrder,
     getAllOrder,
     updateOrder,
-    createOrder
+    createOrder,
+    getOrderWithUser
 }

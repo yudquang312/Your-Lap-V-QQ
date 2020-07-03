@@ -24,9 +24,11 @@ async function handlePayment() {
         axios.post(`http://localhost:3001/api/v1/order?token=${token}`, paymentAddress).then((res) => {
             if(res.data.createdOrder ) {
                 alert('thanh cong');
+                localStorage.removeItem('products');
                 redirect('donhangOfOneUser.html');
             }
             else {
+                console.log(res)
                 alert('that bai')
             }
         })

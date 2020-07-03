@@ -13,9 +13,18 @@
     <link rel="stylesheet" href="./assets/css/cart.css">
     <link rel="stylesheet" href="./assets/css/donhang.css">
     <link rel="stylesheet" href="./assets/css/donhangOfOneUser.css">
+    <link rel="stylesheet" href="./css/order.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="./js/until.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+        if(!token || !userId) {
+            redirect('login.html');
+        }
+    </script>
 </head>
 
 <body>
@@ -394,7 +403,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <!-- <tr>
                                 <th scope="row">DH 01</th>
                                 <td>01/04/2020</td>
                                 <td>02/04/2020</td>
@@ -459,7 +468,7 @@
                                 <td>0393347568</td>
                                 <td>08 Hà Văn Tín, tp Đà Nẵng</td>
                                 <td>100.000.000đ</td>
-                              </tr>
+                              </tr> -->
                             </tbody>
                           </table>
                     </div>
@@ -515,19 +524,19 @@
                         <h3 class="footer__heading">Theo dõi chúng tôi</h3>
                         <ul class="footer-list">
                             <li class="footer-item">
-                                <a href="#" class="footer-item__link">
+                                <a href="#" class="footer-item__link footer-item__link--none">
                                     <i class="footer-item__icon fab fa-facebook"></i>
                                     Facebook
                                 </a>
                             </li>
                             <li class="footer-item">
-                                <a href="#" class="footer-item__link">
+                                <a href="#" class="footer-item__link footer-item__link--none">
                                     <i class="footer-item__icon fab fa-instagram"></i>
                                     Instagram
                                 </a>
                             </li>
                             <li class="footer-item">
-                                <a href="#" class="footer-item__link">
+                                <a href="#" class="footer-item__link footer-item__link--none">
                                     <i class="footer-item__icon fab fa-linkedin"></i>
                                     Linkedin
                                 </a>
@@ -562,8 +571,12 @@
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="./js/Homepage/handleDisplay.js"></script>
+    
     <script src="./js/LoadCart.js"></script>
     <script src="./js/Homepage/LoadUser.js"></script>
+    <script src="./js/OrderUser/LoadOrder.js"></script>
 </body>
 
 </html>

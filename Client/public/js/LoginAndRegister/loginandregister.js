@@ -21,33 +21,42 @@ loginForm.addEventListener('submit',function(e){
 
 
 function checkInputsRegister(){
+    let error = false;
     const user_mailValue = user_mail.value.trim();
     const user_passValue = user_pass.value.trim();
     const user_confirmpassValue = user_confirmpass.value.trim();
 
     if(user_mailValue === ''){
         setErrorFor(user_mail,'Email không được để trống');
+        error = true;
     }else if(!isEmail(user_mailValue)){
         setErrorFor(user_mail,'Email không hợp lệ, xin thử lại');
+        error = true;
     }else{
         setSuccessFor(user_mail);
     }
 
     if(user_passValue === ''){
         setErrorFor(user_pass,'Mật khẩu không được để trống');
+        error = true;
     }else if(!isPassword(user_passValue)){
-        setErrorFor(user_pass,'Tối thiểu 8 kí tự. Bao gồm 1 chữ hoa, 1 chữ thường và 1 số');
+        setErrorFor(user_pass,'Tối thiểu 8 kí tự. Bao gồm 1 chữ hoa, chữ thường và 1 số');
+        error = true;
     }else {
         setSuccessFor(user_pass);
     }
 
     if(user_confirmpassValue === ''){
-        setErrorFor(user_confirmpass,'Bạn phải nhập để xác nhận mật khẩu mới')
+        setErrorFor(user_confirmpass,'Bạn phải nhập để xác nhận mật khẩu mới');
+        error = true;
     }else if(user_passValue !== user_confirmpassValue){
         setErrorFor(user_confirmpass,'Mật khẩu mới không trùng khớp');
-        
+        error = true;
     }else{
         setSuccessFor(user_confirmpass);
+    }
+    if(!error) {
+        register();
     }
 }
 

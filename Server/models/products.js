@@ -59,13 +59,6 @@ const productSchema = new mongoose.Schema({
         ref: 'User',
         require: true
     },
-    promotion: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Promotion',
-    },
-    deleteAt: {
-        type: Date
-    }   
     
 }, {timestamps: true});
 

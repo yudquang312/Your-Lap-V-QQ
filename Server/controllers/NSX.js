@@ -6,11 +6,11 @@ const bcrypt = require('bcrypt-nodejs');
 const deleteNSX = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const NSXDelete = await NSX.findOne({_id: id}).lean();
+        const NSXDelete = await NSX.findOne({_id: id, deleteAt: undefined}).lean();
         if (!NSXDelete) {
             return next(new Error('NSX_NOT_FOUND'));
         }
-        await NSX.updateOne({ _id: id }, {data: {$set: { deleteAt: new Date() }}} );
+        await NSX.updateOne({ _id: id }, {$set: { deleteAt: new Date() }} );
         return res.status(200).json({
             message : 'delete nsx successful',
         });
@@ -62,7 +62,7 @@ const updateNSX = async (req, res, next) => {
         const { id } = req.params;
         const data = req.body;
         _.omitBy(data, _.isNull);
-        const existedNSX = await NSX.findOne({ _id: id });
+        const existedNSX = await NSX.findOne({ _id: id, deleteAt: undefined});
         if (!existedNSX) {
             return next(new Error('NSX_NOT_FOUND'));
         }

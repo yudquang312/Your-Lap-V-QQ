@@ -34,6 +34,7 @@
     padding: 5px;
     justify-content: space-between;
     /* align-items: center; */
+    margin: 12px 0;
 }
 
 .cart_content__img {
@@ -43,6 +44,7 @@
 
 .cart_content__info {
     /* flex-grow: 1; */
+    padding-left: 16px;
 }
 
 .cart_content__heading {
