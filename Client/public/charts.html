@@ -3,9 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
+  <title></title>
+    <link rel="stylesheet" href="css/chart.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/submenu.css">
+    
     <link rel="stylesheet" href="css/statistics.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -41,7 +43,7 @@
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
-      }
+      }    
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
      <!--  -->
@@ -173,11 +175,13 @@
                       <li class="nav-item submenu">                       
                         <a class="nav-link" href="charts.html"> <div class="icon"></div>Thống kê</a>
                         <ul class="sub-menu">
-                          <li><a href="#">Theo tuần</a></li>
-                          <li><a href="#">Theo tháng</a></li>
-                          <li><a href="#">Theo quý</a></li>
-                          <li><a href="#">Theo năm</a></li>
-                        </ul>
+                          <li>
+                            <a href="productChart.html">Theo sản phẩm</a>                             
+                          </li>
+                          <li>
+                            <a href="charts.html">Theo doanh thu</a>                           
+                          </li>                     
+                      </ul>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
@@ -212,17 +216,21 @@
                               </div>
                               <div class="child-header">
                                 <div class="dropdown">
-                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Loại thống kê
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                      <button class="dropdown-item" type="button">Theo năm</button>
-                                      <button class="dropdown-item" type="button">Theo quý</button>
-                                      <button class="dropdown-item" type="button">Theo tháng</button>
-                                      <button class="dropdown-item" type="button">Theo tuần</button>
-                                    </div>
-                                  </div>
-                                  
+                                    <select name="" id="dropdownSort" class="dropdown-chart">
+                                        <option value="">Thống kê doanh thu</option>
+                                        <option value="">Thống kê sản phẩm</option>
+                                    </select>
+                                  </div>    
+                                  <div class="dropdown">
+                                    <select name="" id="dropdownSort" class="dropdown-chart">
+                                        <option value="">Loại thống kê</option>
+                                        <option value="">Theo tuần</option>
+                                        <option value="">Theo tháng</option>
+                                        <option value="">Theo quý</option>
+                                        <option value="">Theo năm</option>
+
+                                      </select>
+                                  </div>                                  
                               </div>
                                <!-- content - user -->
                             <div class="module-body table charts-table">

@@ -122,11 +122,13 @@
                       <li class="nav-item submenu">                       
                         <a class="nav-link" href="charts.html"> <div class="icon"></div>Thống kê</a>
                         <ul class="sub-menu">
-                          <li><a href="#">Theo tuần</a></li>
-                          <li><a href="#">Theo tháng</a></li>
-                          <li><a href="#">Theo quý</a></li>
-                          <li><a href="#">Theo năm</a></li>
-                        </ul>
+                          <li>
+                            <a href="productChart.html">Theo sản phẩm</a>                             
+                          </li>
+                          <li>
+                            <a href="allChart.html">Theo doanh thu</a>                           
+                          </li>                     
+                      </ul>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
@@ -141,69 +143,54 @@
                         </div>
                     <div class="child-header">
                       <form id="productDetails">
+                        
                         <div class="form-group row">
-                          <label for="productIDUpload" class="col-sm-3 col-form-label">Mã sản phẩm</label>
+                          <label for="productID" class="col-sm-3 col-form-label">Mã sản phẩm</label>
                           <div class="col-sm-9">
-                            <select name="" id="productIDUpload">
-                              <option value="">Mã sản phẩm</option>
-                              <option value="">ABC</option>
-                          </select>
-                            <!-- <input type="text"  name="productIDUpload" class="form-control" id="productIDUpload" placeholder="Nhập mã sản phẩm"> -->
+                            <input type="name" name="productID" class="form-control" id="productID" placeholder="">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="productNameUp" class="col-sm-3 col-form-label">Tên sản phẩm</label>
                           <div class="col-sm-9">
-                            <input type="name" name="productNameUp" class="form-control" id="productNameUp" placeholder="Nhập tên sản phẩm">
+                            <input type="name" name="productNameUp" class="form-control" id="productNameUp" placeholder="">
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="producerIDUp" class="col-sm-3 col-form-label">Mã nhà sản xuất</label>
+                          <label for="producerID" class="col-sm-3 col-form-label">Mã nhà sản xuất</label>
                           <div class="col-sm-9">
-                            <select name="" id="producerIDUp">
-                              <option value="">Mã nhà sản xuất</option>
-                              <option value="">ABC</option>
-                          </select>
-                            <!-- <input type="id" name="producerIDUp" class="form-control" id="producerIDUp" placeholder="Nhập mã nhà sản xuất"> -->
+                            <input type="name" name="producerID" class="form-control" id="producerID" placeholder="">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="typeProductIDUp" class="col-sm-3 col-form-label">Mã loại sản phẩm</label>
                           <div class="col-sm-9">
-                            <select name="" id="typeProductIDUp">
-                              <option value="">Mã loại sản phẩm</option>
-                              <option value="">ABC</option>
-                          </select>
-                            <!-- <input type="id" name="typeProductIDUp" class="form-control" id="typeProductIDUp" placeholder="Nhập mã loại sản phẩm"> -->
+                            <input type="name" name="typeProductIDUp" class="form-control" id="typeProductIDUp" placeholder="">
                           </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                           <label for="typeProductIDPromotion" class="col-sm-3 col-form-label">Mã khuyến mãi</label>
                           <div class="col-sm-9">
-                            <select name="" id="typeProductIDPromotion">
-                              <option value="">Mã khuyến mãi</option>
-                              <option value="">ABC</option>
-                          </select>
-                            <!-- <input type="id" name="typeProductIDPromotion" class="form-control" id="typeProductIDPromotion" placeholder="Nhập mã loại sản phẩm"> -->
+                            <input type="name" name="typeProductIDPromotion" class="form-control" id="typeProductIDPromotion" placeholder="">
                           </div>
-                        </div>
+                        </div> -->
                         
                         <div class="form-group row">
                           <label for="entryPriceUp" class="col-sm-3 col-form-label">Giá nhập</label>
                           <div class="col-sm-9">
-                            <input type="number" name="entryPriceUp" class="form-control" id="entryPriceUp" placeholder="Nhập giá">
+                            <input type="number" name="entryPriceUp" class="form-control" id="entryPriceUp" placeholder="">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="sellPriceUp" class="col-sm-3 col-form-label">Giá bán</label>
                           <div class="col-sm-9">
-                            <input type="number" name="sellPriceUp" class="form-control" id="sellPriceUp" placeholder="Nhập giá bán">
+                            <input type="number" name="sellPriceUp" class="form-control" id="sellPriceUp" placeholder="">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="amountUp" class="col-sm-3 col-form-label">Số lượng</label>
                           <div class="col-sm-9">
-                            <input type="number" name="amountUp" class="form-control" id="amountUp" placeholder="Nhập số lượng">
+                            <input type="number" name="amountUp" class="form-control" id="amountUp" placeholder="">
                           </div>
                         </div>
                         <div class="form-group row">

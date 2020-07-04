@@ -121,11 +121,13 @@
                       <li class="nav-item submenu">                       
                         <a class="nav-link" href="charts.html"> <div class="icon"></div>Thống kê</a>
                         <ul class="sub-menu">
-                          <li><a href="#">Theo tuần</a></li>
-                          <li><a href="#">Theo tháng</a></li>
-                          <li><a href="#">Theo quý</a></li>
-                          <li><a href="#">Theo năm</a></li>
-                        </ul>
+                          <li>
+                            <a href="productChart.html">Theo sản phẩm</a>                             
+                          </li>
+                          <li>
+                            <a href="allChart.html">Theo doanh thu</a>                           
+                          </li>                     
+                      </ul>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
@@ -136,24 +138,20 @@
                           <div class="content content-t">
                             <div class="module message">
                               <div class="main-header">
-                                <h5>Thêm loại sản phẩm</h5>
+                                <h5>Chi tiết loại sản phẩm</h5>
                               </div>
                           <div class="child-header">
                             <form id="producttype">
-                                <div class="form-group row">
-                                  <label for="productIDType" class="col-sm-3 col-form-label">Mã loại sản phẩm</label>
-                                  <div class="col-sm-9">
-                                    <select name="" id="productIDType">
-                                      <option value="">Mã loại sản phẩm</option>
-                                      <option value="">ABC</option>
-                                  </select>
-                                    <!-- <input type="id"  name="productIDType" class="form-control" id="productIDType" placeholder="Nhập mã loại sản phẩm"> -->
-                                  </div>
+                              <div class="form-group row">
+                                <label for="productTypeID" class="col-sm-3 col-form-label">Mã loại sản phẩm</label>
+                                <div class="col-sm-9">
+                                  <input type="name" name="productTypeID" class="form-control" id="productTypeID" placeholder="">
                                 </div>
+                              </div>
                                 <div class="form-group row">
                                   <label for="productNameType" class="col-sm-3 col-form-label">Tên loại sản phẩm</label>
                                   <div class="col-sm-9">
-                                    <input type="name" name="productNameType" class="form-control" id="productNameType" placeholder="Nhập tên loại sản phẩm">
+                                    <input type="name" name="productNameType" class="form-control" id="productNameType" placeholder="">
                                   </div>
                                 </div>
                                 <!-- <div class="form-group row">
@@ -165,20 +163,12 @@
                                 
                                 
                           <!-- Brower-img -->
-                         <!-- <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="inputGroupFileAddon01">Ảnh</span>
-                            </div>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                            </div>
-                          </div> -->
+                       
                           <!-- Brower-img -->
                                
                                 <div class="form-group row">
                                   <div class="col-sm-12 btn-add">
-                                    <button type="submit" class="btn btn-primary btn-add">Thêm</button>
+                                    <button type="submit" class="btn btn-primary btn-add">Cập nhật</button>
                                   </div>
                                 </div>
                                 <div class="errors">

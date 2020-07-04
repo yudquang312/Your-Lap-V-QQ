@@ -31,7 +31,7 @@
     position: absolute;
     top: -10px;
     left: 100%;
-    width: 100%;
+    width: 120%;
     background-color: #d60c0c;
     padding: 0px 20px;
     padding-bottom: 10px;
@@ -48,7 +48,7 @@
     padding: 10px;  
     color: #fff;
     height: 120%;
-    width: 100%;
+    width: 100%!important;
     
   }
 

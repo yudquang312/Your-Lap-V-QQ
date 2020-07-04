@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/orderDetails.css">
     <link rel="stylesheet" href="css/submenu.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Lato:wght@700&family=Roboto&display=swap" rel="stylesheet">
@@ -120,11 +121,13 @@
                       <li class="nav-item submenu">                       
                         <a class="nav-link" href="charts.html"> <div class="icon"></div>Thống kê</a>
                         <ul class="sub-menu">
-                          <li><a href="#">Theo tuần</a></li>
-                          <li><a href="#">Theo tháng</a></li>
-                          <li><a href="#">Theo quý</a></li>
-                          <li><a href="#">Theo năm</a></li>
-                        </ul>
+                          <li>
+                            <a href="productChart.html">Theo sản phẩm</a>                             
+                          </li>
+                          <li>
+                            <a href="allChart.html">Theo doanh thu</a>                           
+                          </li>                     
+                      </ul>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
@@ -140,25 +143,36 @@
                     <div class="child-header">
                       <form id="orderDetails">
                         <div class="form-group row">
-                            <label for="orderIDDetails" class="col-sm-3 col-form-label">Mã đơn hàng</label>
-                            <div class="col-sm-9">
-                              <select name="" id="orderIDDetails">
-                                <option value="">Mã đơn hàng</option>
-                                <option value="">ABC</option>
-                            </select>
-                              <!-- <input type="id" name="orderIDDetails" class="form-control" id="inputIdPr"> -->
-                            </div>
+                          <label for="orderDetailID" class="col-sm-3 col-form-label">Mã chi tiết ĐH</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="orderDetailID" class="form-control" id="orderDetailID">
                           </div>
-                          <div class="form-group row">
-                            <label for="productIDDetail" class="col-sm-3 col-form-label">Mã sản phẩm</label>
-                            <div class="col-sm-9">
-                              <select name="" id="productIDDetail">
-                                <option value="">Mã sản phẩm</option>
-                                <option value="">ABC</option>
-                            </select>
-                              <!-- <input type="id" name="productIDDetail" class="form-control" id="inputIdPr"> -->
-                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
+                          <label for="orderID" class="col-sm-3 col-form-label">Mã đơn hàng</label>
+                          <div class="col-sm-9">
+                            <input type="name" name="orderID" class="form-control" id="orderID">
                           </div>
+                        </div> -->
+                        <div class="form-group row">
+                          <label for="cusID" class="col-sm-3 col-form-label">Mã khách hàng</label>
+                          <div class="col-sm-9">
+                            <input type="id" name="cusID" class="form-control" id="cusID" >
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="cusNameor" class="col-sm-3 col-form-label">Tên khách hàng</label>
+                          <div class="col-sm-9">
+                            <input type="id" name="cusNameor" class="form-control" id="cusNameor" >
+                          </div>
+                        </div>
+                        
+                        <!-- <div class="form-group row">
+                          <label for="productID" class="col-sm-3 col-form-label">Mã sản phẩm</label>
+                          <div class="col-sm-9">
+                            <input type="name" name="productID" class="form-control" id="productID">
+                          </div>
+                        </div>
                           <div class="form-group row">
                             <label for="productNameDetail" class="col-sm-3 col-form-label">Tên sản phẩm</label>
                             <div class="col-sm-9">
@@ -176,33 +190,92 @@
                             <div class="col-sm-9">
                               <input type="price" name="priceOrder" class="form-control" id="inputSellPrice">
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-group row">
-                            <label for="promotionOrder" class="col-sm-3 col-form-label">Mã khuyến mãi</label>
+                            <label for="promotionID" class="col-sm-3 col-form-label">Mã khuyến mãi</label>
                             <div class="col-sm-9">
-                              <select name="" id="promotionOrder">
-                                <option value="">Mã khuyến mãi</option>
-                                <option value="">ABC</option>
-                            </select>
-                              <!-- <input type="price" name="promotionOrder" class="form-control" id="inputSellPrice"> -->
+                              <input type="id" name="promotionID" class="form-control" id="promotionID" >
+                            </div>
+                          </div>
+                                 
+                          <div class="form-group row">
+                            <label for="recipientPhone" class="col-sm-3 col-form-label">SĐT khách hàng</label>
+                            <div class="col-sm-9">
+                              <input type="number" name="recipientPhone" class="form-control" id="recipientPhone" >
                             </div>
                           </div>
                           
+                          <div class="form-group row">
+                            <label for="cusEmailor" class="col-sm-3 col-form-label">Email khách hàng</label>
+                            <div class="col-sm-9">
+                              <input type="price" name="cusEmailor" class="form-control" id="cusEmailor" >
+                            </div>
+                          </div>
+                          <div class="form-group row"> 
+                            <label for="recipientAddress" class="col-sm-3 col-form-label">Địa chỉ khách hàng</label>
+                            <div class="col-sm-9">
+                              <input type="price" name="recipientAddress" class="form-control" id="recipientAddress" >
+                            </div>
+                          </div>
+                          
+                          <div class="form-group row">
+                            <label for="deliveryDateOr" class="col-sm-3 col-form-label">Ngày giao hàng</label>
+                            <div class="col-sm-9">
+                              <input type="date" name="deliveryDateOr" class="form-control" id="deliveryDateOr">
+                            </div>
+                          </div>
                           <div class="form-group row">
                             <label for="dateUpdateOrder" class="col-sm-3 col-form-label">Ngày cập nhật</label>
                             <div class="col-sm-9">
                               <input type="date" name="dateUpdateOrder" class="form-control" id="inputEmail3">
                             </div>
                           </div>
-                          <div class="form-group row">
+                          <div class="orderDetailsTable">
+                            <table class="orderTable">
+                                <tbody>
+                                    <tr class="headingOrder">
+                                        <td class="cell-icon headingtd">
+                                          Mã sản phẩm
+                                        </td>
+                                        <td class="cell-author headingtd hidden-phone hidden-tablet">
+                                            Tên sản phẩm
+                                        </td>
+                                        <td class="cell-title headingtd">
+                                           Số lượng
+                                        </td>
+                                        <td class="cell-icon headingtd hidden-phone hidden-tablet">
+                                           Đơn giá
+                                        </td>
+                                                                             
+                                    </tr>
+                                    <tr class="unread">                                          
+                                            <td class="cell-check">
+                                                AK47
+                                            </td>
+                                            <td class="cell-icon">
+                                                Súng bắn chim
+                                            </td>
+                                            <td class="cell-author hidden-phone hidden-tablet">
+                                                1
+                                            </td>
+                                          
+                                            <td class="cell-icon hidden-phone hidden-tablet">
+                                             1000
+                                            </td>
+                                                                                                                               
+                                           </tr>
+                                      </tbody>
+                                </table>
+                              </div>
+                          <!-- <div class="form-group row">
 
                             <label for="descriptionOrder" class="col-sm-3 col-form-label">Mô tả</label>
                             <div class="col-sm-9">
                                <textarea name="descriptionOrder" id="" cols="70" rows="6"></textarea>
                             </div>
-                          </div>
+                          </div> -->
                     <!-- Brower-img -->
-                   <div class="input-group mb-3">
+                   <!-- <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">Ảnh</span>
                       </div>
@@ -210,12 +283,12 @@
                         <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- Brower-img -->
                          
                           <div class="form-group row">
                             <div class="col-sm-12 btn-add">
-                              <button type="submit" class="btn btn-primary btn-add">Thêm</button>
+                              <button type="submit" class="btn btn-primary btn-add">Cập nhật</button>
                             </div>
                           </div>
                       </form>

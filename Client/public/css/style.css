@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+body{
+	width: 100%;
+}
+
 .headingbav{
 	font-size: 19px;
 	font-weight: 400;
@@ -39,36 +43,56 @@
 
 .row{
 	display: flex;
+	padding: 0;
+	margin: 0;
+	width: 100%;
 }
+
+.container{
+	max-width: none!important;
+	margin: 0;
+}
+
+/* @media (min-width: 992px){
+.container, .container-lg, .container-md, .container-sm {
+    max-width: 100%;
+} */
 
 
 .col-sm-9 {
-	padding: 7px 15px;
+	padding: 0px 15px;
 	position: absolute;
 }
-/* 
-tbody{
+
+.col-9{
+	word-break: break-word;
+	min-width: 500px;
+}
+
+.tbody{
 	height: auto;
 	max-width: 200px;	
+	box-sizing: border-box;
+	overflow: inherit;
+	overflow: auto;
+	/* word-wrap: break-word;
+	text-overflow: clip; */
 }
+
+
 
 td{
-	height: auto;
-	width: 250px;
+	/* word-break: ; */
+	max-width: 200px;
 }
 
-.module-body{
-	max-width: 30px;
-	position: relative;
-} */
-
 .col-3{
-	border-radius: 5px;
+	border-radius: 0 5px 5px 0!important;
 	height: 100%;
-	width: 100%;
-	max-width: 18em;
-	margin-top:25px;
+	max-width: 250px!important;
+	margin:0px!important;
 	background-color: #d60c0c;
+	min-width: 150px;
 }
 
 
@@ -114,8 +138,9 @@ td{
 
 .content{
 	height: auto;
-	width: 100%;
-	margin-top: 25px;
+	/* width: 100%; */
+	width: 900px;
+	margin-top: 0px;
 	padding: auto;
 }
 
@@ -195,7 +220,7 @@ table{
 }
 
 .page-navigation ul{
-	width: 100%;
+	/* width: 100%; */
 	height: auto;
 	max-width: max-content;
 	margin: auto;
@@ -329,4 +354,25 @@ select{
 
 option{
 	border: 1px solid #fff;
+}
+
+@media screen and (min-width: 480px){
+	.submenu2{
+		width: 100%;
+	}
+	.col-3{
+		align-items: center;
+		width: 100%;	
+		border-radius: 5px;
+		height: auto;
+		max-width: 18em;
+		margin-top:0px;
+		background-color: #d60c0c;
+		min-width: 150px;
+		margin: auto;
+		
+	}
+	/* .nav-item{
+		min-width: 200px;
+	} */
 }

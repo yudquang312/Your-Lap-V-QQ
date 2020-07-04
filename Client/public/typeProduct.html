@@ -122,11 +122,13 @@
                       <li class="nav-item submenu">                       
                         <a class="nav-link" href="charts.html"> <div class="icon"></div>Thống kê</a>
                         <ul class="sub-menu">
-                          <li><a href="#">Theo tuần</a></li>
-                          <li><a href="#">Theo tháng</a></li>
-                          <li><a href="#">Theo quý</a></li>
-                          <li><a href="#">Theo năm</a></li>
-                        </ul>
+                          <li>
+                            <a href="productChart.html">Theo sản phẩm</a>                             
+                          </li>
+                          <li>
+                            <a href="allChart.html">Theo doanh thu</a>                           
+                          </li>                     
+                      </ul>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
@@ -142,9 +144,10 @@
                         <div class="child-header">
                         <div class="dropdown">
                           <select name="dropownSort" id="dropdownSort">
+                            <option value="">Sắp xếp</option>
                             <option value="">Mã SP</option>
-                            <option value="">Tên SP a-z </option>
-                            <option value="">Tên SP z-a</option>
+                            <option value="">Tên SP</option>
+                            <!-- <option value="">Tên SP z-a</option> -->
                             
                           </select>
                               
@@ -207,84 +210,7 @@
                                             </td>
                                            </a>                        
                                       </tr>     
-                                      <tr class="unread">
-                                        <a href="#">
-                                          <td class="cell-check">
-                                                <!-- <input type="checkbox" class="inbox-checkbox"> -->
-                                                </td>
-                                                <td class="cell-check">
-                                                P1P2k3
-                                                </td>
-                                                <td class="cell-icon">
-                                                    ABC123
-                                                </td>
-                                                <!-- <td class="cell-author hidden-phone hidden-tablet">
-                                                    KHO01
-                                                </td> -->
-                                                <td>
-                                                  <div class="pull-right">
-                                                      <a href="typrProductDetails.html" class="btn btn-primary">Sửa</a>
-                                                  </div>
-                                              </td>
-                                              <td>
-                                                  <div class="pull-right">
-                                                      <a href="#" class="btn btn-primary">Xoá</a>
-                                                  </div>
-                                              </td>
-                                             </a>                        
-                                        </tr>
-                                        <tr class="unread">
-                                          <a href="#">
-                                            <td class="cell-check">
-                                                  <!-- <input type="checkbox" class="inbox-checkbox"> -->
-                                                  </td>
-                                                  <td class="cell-check">
-                                                  P1P2k3
-                                                  </td>
-                                                  <td class="cell-icon">
-                                                      ABC123
-                                                  </td>
-                                                  <!-- <td class="cell-author hidden-phone hidden-tablet">
-                                                      KHO01
-                                                  </td> -->
-                                                  <td>
-                                                    <div class="pull-right">
-                                                        <a href="typrProductDetails.html" class="btn btn-primary">Sửa</a>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="pull-right">
-                                                        <a href="#" class="btn btn-primary">Xoá</a>
-                                                    </div>
-                                                </td>
-                                               </a>                        
-                                          </tr>
-                                          <tr class="unread">
-                                            <a href="#">
-                                              <td class="cell-check">
-                                                    <!-- <input type="checkbox" class="inbox-checkbox"> -->
-                                                    </td>
-                                                    <td class="cell-check">
-                                                    P1P2k3
-                                                    </td>
-                                                    <td class="cell-icon">
-                                                        ABC123
-                                                    </td>
-                                                    <!-- <td class="cell-author hidden-phone hidden-tablet">
-                                                        KHO01
-                                                    </td> -->
-                                                    <td>
-                                                      <div class="pull-right">
-                                                          <a href="typrProductDetails.html" class="btn btn-primary">Sửa</a>
-                                                      </div>
-                                                  </td>
-                                                  <td>
-                                                      <div class="pull-right">
-                                                          <a href="#" class="btn btn-primary">Xoá</a>
-                                                      </div>
-                                                  </td>
-                                                 </a>                        
-                                            </tr>                     
+                                                         
                               </tbody>
                         </table>
                       </div>
