@@ -39,20 +39,20 @@ async function loadUserList() {
                     ${user._id}
                 </td>
                 <td class='cell-author hidden-phone hidden-tablet'>
-                    ${user.fullname}
+                    ${user.fullname ? user.fullname : 'Chưa Có'}
                 </td>
                 <td class="cell-title">
-                    ${user.phoneNumber}
+                    ${user.phoneNumber ? user.phoneNumber : 'Chưa Có'}
                 </td>
                 <td class="cell-icon hidden-phone hidden-tablet">
-                    ${user.email}
+                    ${user.email ? user.email : 'Chưa Có'}
                 </td>
                 <td class="cell-time align-right">
-                    ${user.createdAt}
+                    ${user.createdAt.slice(0, 10)}
                 </td>
                 <td>
                     <div class="btn btn-primary pull-right view-${user._id}">
-                        Sửa
+                        Xem
                     </div>
                 </td>
                 <td>

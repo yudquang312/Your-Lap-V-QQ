@@ -56,11 +56,11 @@ async function loadProductList() {
                     ${product.price}
                 </td>
                 <td class="cell-icon hidden-phone hidden-tablet">
-                    ${product.updatedAt}
+                    ${product.updatedAt.slice(0, 10)}
                 </td>
                 <td>
                     <div class="btn btn-primary pull-right view-${product._id}">
-                        Sửa
+                        Xem
                     </div>
                 </td>
                 <td>

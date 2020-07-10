@@ -5,6 +5,10 @@ async function loadOrderList() {
     const getDataOrders = await axios.get(`http://localhost:3001/api/v1/order`);
     const Orders = getDataOrders.data.listOrder;
     console.log(Orders);
+    const getDataOrdersDetail = await axios.get(`http://localhost:3001/api/v1/orderdetail`);
+    console.log(getDataOrdersDetail);
+    const ordersDetail = getDataOrdersDetail.data.listOrderDetail;
+    console.log(ordersDetail);
     $('tbody').empty().append(
         `<tr class="heading">
         <td class="cell-check">
@@ -51,7 +55,7 @@ async function loadOrderList() {
                 </td>
                 <td>
                     <div class="btn btn-primary pull-right view-${order._id}">
-                        Sửa
+                        Xem
                     </div>
                 </td>
                 <td>

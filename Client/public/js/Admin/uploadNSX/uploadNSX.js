@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('#uploadProducer').submit(function (event) {
-        console.log(1);
+        // console.log(1);
+        event.preventDefault();
         axios.post(`http://localhost:3001/api/v1/nsx`, {
             name: $('#producerNameUp').val(),
             nation: $('#nation').val()

@@ -1,228 +1,194 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/submenu.css">
-    <link rel="stylesheet" href="css/statistics.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="css/styleTK.css">
+  <link rel="stylesheet" href="css/submenu.css">
+  <link rel="stylesheet" href="css/statistics.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Lato:wght@700&family=Roboto&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/25d5d42d76.js" crossorigin="anonymous"></script>
-     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
-    <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
-        rel='stylesheet'>
-     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-     <!--  -->
-     <script type="text/javascript">
-     google.charts.load('current', {'packages':['corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawStuff);
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Lato:wght@700&family=Roboto&display=swap"
+    rel="stylesheet">
+  <script src="https://kit.fontawesome.com/25d5d42d76.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+  <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
+    rel='stylesheet'>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!--  -->
 
-      function drawStuff() {
 
-        var button = document.getElementById('change-chart');
-        var chartDiv = document.getElementById('chart_div');
-
-        var data = google.visualization.arrayToDataTable([
-          ['Galaxy', 'Số lượng', 'Doanh thu'],
-          ['Canis Major Dwarf', 8000, 23.3],
-          ['Sagittarius Dwarf', 24000, 4.5],
-          ['Ursa Major II Dwarf', 30000, 14.3],
-          ['Lg. Magellanic Cloud', 50000, 0.9],
-          ['Bootes I', 60000, 13.1]
-        ]);
-
-        var materialOptions = {
-          width: 900,
-          chart: {
-            title: 'Nearby galaxies',
-            subtitle: 'distance on the left, brightness on the right'
-          },
-          series: {
-            0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
-            1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
-          },
-          axes: {
-            y: {
-              distance: {label: 'parsecs'}, // Left y-axis.
-              brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
-            }
-          }
-        };
-
-        var classicOptions = {
-          width: 900,
-          series: {
-            0: {targetAxisIndex: 0},
-            1: {targetAxisIndex: 1}
-          },
-          title: 'Nearby galaxies - distance on the left, brightness on the right',
-          vAxes: {
-            // Adds titles to each axis.
-            0: {title: 'parsecs'},
-            1: {title: 'apparent magnitude'}
-          }
-        };
-
-        function drawMaterialChart() {
-          var materialChart = new google.charts.Bar(chartDiv);
-          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
-          button.innerText = 'Change to Classic';
-          button.onclick = drawClassicChart;
-        }
-
-        function drawClassicChart() {
-          var classicChart = new google.visualization.ColumnChart(chartDiv);
-          classicChart.draw(data, classicOptions);
-          button.innerText = 'Change to Material';
-          button.onclick = drawMaterialChart;
-        }
-
-        drawMaterialChart();
-    };
-    </script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
-     <!--  -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@600&display=swap"
+    rel="stylesheet">
+  <!--  -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="navbar-YouLap"><a class="navbar-brand" href="#">YourLap</a></div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- <ul class="navbar-nav mr-auto">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-YouLap"><a class="navbar-brand" href="#">YourLap</a></div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- <ul class="navbar-nav mr-auto">
            
               -->
-          </div> 
+    </div>
 
-        <div class="btn-group dropleft">                
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <img src="https://img.icons8.com/officel/40/000000/businessman.png"/>
-                    <b class="caret"></b>
-                </a>
-              </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Your Account</button>  
-                <button class="dropdown-item" type="button">Account Setting</button>              
-                <button class="dropdown-item" type="button">Log out</button>
-              </div>
-        </div>
-        </nav>
-        
-        <div class="main">
-            <div class="container">
-                <div class="row">
-                  <div class="col-3">
-                    <ul class="nav flex-column submenu2" >
-                        <li class="nav-item">                            
-                        <a class="nav-link active" href="admin.html">Trang chủ</a>
-                      </li>
-                      <li class="nav-item">                          
-                        <a class="nav-link active" href="new-feed.html"><div class="icon"></div>Bản tin</a>
-                      </li>
-                        <li class="nav-item">                          
-                        <a class="nav-link active" href="notification.html">  <div class="icon"></div>Thông báo</a>
-                      </li>
-                      <li class="nav-item">                       
-                        <a class="nav-link active" href="mes.html"> <div class="icon"></div>Khuyến mãi</a>
-                        <ul class="sub-menu">
-                          <li><a href="uploadPromtion.html">Thêm khuyến mãi</a></li>
-                          <li>
-                              <a href="promotionType.html">Loại khuyến mãi</a>
-                              <ul class="sub-menu uploadProtionType">
-                                  <li><a href="uploadPromotionType.html">Thêm loại khuyến mãi</a></li> 
-                              </ul>
-                          </li>
-                                                        
-                        </ul>
-                      </li>
-                      <li class="nav-item submenu" >                        
-                        <a class="nav-link active" href="product.html"><div class="icon"></div>Quản lý sản phẩm</a>
-                        <ul class="sub-menu">
-                          <li><a href="uploadProduct.html">Thêm sản phẩm</a></li>
-                          <!-- <li><a href="#">Xoá sản phẩm</a></li>
+    <div class="btn-group dropleft">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <img src="https://img.icons8.com/officel/40/000000/businessman.png" />
+        <b class="caret"></b>
+      </a>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button">Your Account</button>
+        <button class="dropdown-item" type="button">Account Setting</button>
+        <button class="dropdown-item" type="button">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <ul class="nav flex-column submenu2">
+            <li class="nav-item">
+              <a class="nav-link active" href="admin.html">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="new-feed.html">
+                <div class="icon"></div>Bản tin
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="notification.html">
+                <div class="icon"></div>Thông báo
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="mes.html">
+                <div class="icon"></div>Khuyến mãi
+              </a>
+              <ul class="sub-menu">
+                <li><a href="uploadPromtion.html">Thêm khuyến mãi</a></li>
+                <li>
+                  <a href="promotionType.html">Loại khuyến mãi</a>
+                  <ul class="sub-menu uploadProtionType">
+                    <li><a href="uploadPromotionType.html">Thêm loại khuyến mãi</a></li>
+                  </ul>
+                </li>
+
+              </ul>
+            </li>
+            <li class="nav-item submenu">
+              <a class="nav-link active" href="product.html">
+                <div class="icon"></div>Quản lý sản phẩm
+              </a>
+              <ul class="sub-menu">
+                <li><a href="uploadProduct.html">Thêm sản phẩm</a></li>
+                <!-- <li><a href="#">Xoá sản phẩm</a></li>
                           <li><a href="productDetails.html">Sửa thông tin sản phẩm</a></li> -->
-                        </ul>
-                      </li>
-                      <li class="nav-item submenu">                        
-                        <a class="nav-link" href="user.html"><div class="icon"></div>Quản lý tài khoản</a>
-                        <ul class="sub-menu">
-                          <li><a href="uploadUser.html">Thêm tài khoản</a></li>
-         
-                        </ul>
-                      </li>
-                      <li class="nav-item submenu">
-                        
-                        <a class="nav-link" href="order.html"><div class="icon"></div>Quản lý đơn hàng</a>
-                        <ul class="sub-menu">
-                          <li><a href="uploadOrder.html">Thêm đơn hàng</a></li>
-                  
-                        </ul>
-                      </li>
-                      </li>
-                      <li class="nav-item submenu">                       
-                        <a class="nav-link" href="typeProduct.html"> <div class="icon"></div>Loại sản phẩm</a>
-                        <ul class="sub-menu">
-                          <li><a href="uploadProductType.html">Thêm loại sản phẩm</a></li>
-                          
-                        </ul>
-                      </li>
-                      <li class="nav-item submenu">                       
-                        <a class="nav-link" href="producer.html"> <div class="icon"></div>Nhà sản xuất</a>
-                        <ul class="sub-menu">
-                          <li><a href="uploadProducer.html">Thêm NSX</a></li>
-                          
-                        </ul>
-                      </li>
-                      <li class="nav-item">                       
-                        <a class="nav-link" href="rate.html"> <div class="icon"></div>Đánh giá</a>
-                      </li>
-                      <li class="nav-item submenu">                       
-                        <a class="nav-link" href="charts.html"> <div class="icon"></div>Thống kê</a>
-                        <ul class="sub-menu">
-                          <li>
-                            <a href="productChart.html">Theo sản phẩm</a>                             
-                          </li>
-                          <li>
-                            <a href="charts.html">Theo doanh thu</a>                           
-                          </li>                     
-                      </ul>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
-                      </li>
-                    </ul>
-                  </div>
-                       <div class="col-9">
-                        <div class="content content-t">
-                          
+              </ul>
+            </li>
+            <li class="nav-item submenu">
+              <a class="nav-link" href="user.html">
+                <div class="icon"></div>Quản lý tài khoản
+              </a>
+              <ul class="sub-menu">
+                <li><a href="uploadUser.html">Thêm tài khoản</a></li>
 
-                          <div class="main-header">
-                                <h5>Thống kê sản phẩm</h5>
-                              </div>
-                              <div class="child-header">
-                                <div class="dropdown">
-                                    <select name="" id="dropdownSort" class="dropdown-chart">
-                                        <option value="">Loại thống kê</option>
-                                        <option value="">Theo tuần</option>
-                                        <option value="">Theo tháng</option>
-                                        <option value="">Theo quý</option>
-                                        <option value="">Theo năm</option>
+              </ul>
+            </li>
+            <li class="nav-item submenu">
 
-                                      </select>
-                                  </div>  
-                                  <!-- <div class="dropdown">
+              <a class="nav-link" href="order.html">
+                <div class="icon"></div>Quản lý đơn hàng
+              </a>
+              <ul class="sub-menu">
+                <li><a href="uploadOrder.html">Thêm đơn hàng</a></li>
+
+              </ul>
+            </li>
+            </li>
+            <li class="nav-item submenu">
+              <a class="nav-link" href="typeProduct.html">
+                <div class="icon"></div>Loại sản phẩm
+              </a>
+              <ul class="sub-menu">
+                <li><a href="uploadProductType.html">Thêm loại sản phẩm</a></li>
+
+              </ul>
+            </li>
+            <li class="nav-item submenu">
+              <a class="nav-link" href="producer.html">
+                <div class="icon"></div>Nhà sản xuất
+              </a>
+              <ul class="sub-menu">
+                <li><a href="uploadProducer.html">Thêm NSX</a></li>
+
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="rate.html">
+                <div class="icon"></div>Đánh giá
+              </a>
+            </li>
+            <li class="nav-item submenu">
+              <a class="nav-link" href="charts.html">
+                <div class="icon"></div>Thống kê
+              </a>
+              <ul class="sub-menu">
+                <li>
+                  <a href="productChart.html">Theo sản phẩm</a>
+                </li>
+                <li>
+                  <a href="charts.html">Theo doanh thu</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="false">Log out</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-9">
+          <div class="content content-t">
+
+
+            <div class="main-header">
+              <h5>Thống kê sản phẩm</h5>
+            </div>
+            <div class="child-header">
+              <div class="dropdown">
+                <select name="" id="dropdownSort" class="dropdown-chart">
+                  <option value="">Loại thống kê</option>
+                  <option value="">Theo tuần</option>
+                  <option value="">Theo tháng</option>
+                  <option value="">Theo quý</option>
+                  <option value="">Theo năm</option>
+
+                </select>
+              </div>
+              <!-- <div class="dropdown">
                                     <select name="" id="dropdownSort" class="dropdown-chart">
                                         <option value="">Loại thống kê</option>
                                         <option value="">Theo tuần</option>
@@ -232,64 +198,54 @@
 
                                       </select>
                                   </div>                                 -->
-                              </div>
-                              
-                               <!-- content - user -->
-                            <div class="module-body table charts-table">
-                                    <table class="table table-message">
-                                       
-                                    </tbody> 
-                              </table>
-                              <div class="statistics">
-                                  <form>
-                                      <div class="form-group row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Tổng chi</label>
-                                        <div class="col-sm-5">
-                                          <input type="text" class="form-control" id="input-number" value="20000000">
-                                        </div> 
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">VND</label>                                       
-                                      </div>
-                                      <div class="form-group row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label" >Doanh thu</label>
-                                        <div class="col-sm-5">
-                                          <input type="text" class="form-control" id="input-number" value="10">
-                                        </div>
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">VND</label>                                           
-                                      </div>
-                                      <div class="form-group row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Lợi nhuận</label>
-                                        <div class="col-sm-5">
-                                          <input type="text" class="form-control" id="input-number" value="-1999980">
-                                        </div>
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">VND</label>                                          
-                                      </div>
-                                    </form>
-                              </div>
-                              
-                            </div>
-                            <!--  content- user -->
-                            </div>   
-                                                  <!-- CHART -->
-                              <button id="change-chart">Change to Classic</button>
-                              <br><br>
-                              <div id="chart_div" style="width: 800px; height: 500px;"></div>
-                                              <!-- CHART -->
-                              </div> 
-                          </div>
-                        </div>
-            </div> 
+            </div>
+
+            <!-- content - user -->
+            <div class="module-body table charts-table">
+              <table class="table table-message">
+
+                </tbody>
+              </table>
+              <div class="statistics">
+                <form>
+
+                  <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Doanh thu</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control" id="doanhthu" value="10">
+                    </div>
+                    <label for="inputPassword" class="col-sm-2 col-form-label">VND</label>
+                  </div>
+
+                </form>
               </div>
-               
-              
+
+            </div>
+            <!--  content- user -->
+          </div>
+          <!-- CHART -->
+          <button id="change-chart">Change to Classic</button>
+          <br><br>
+          <div id="chart_div" style="width: 800px; height: 500px;"></div>
+          <!-- CHART -->
         </div>
-        
-    <div class="footer">
-        <p class="ft"><b>© 2020 Laptop - YourLap.com </b></p>
-        <p class="res">All rights reserved</p>
+      </div>
     </div>
-        
-<!-- /////////////////////////////////         -->
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+  </div>
+  </div>
+
+
+  </div>
+
+  <div class="footer">
+    <p class="ft"><b>© 2020 Laptop - YourLap.com </b></p>
+    <p class="res">All rights reserved</p>
+  </div>
+
+  <!-- /////////////////////////////////         -->
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/Admin/manageTK/handleTKProduct.js"></script>
 </body>
-   
+
 </html>

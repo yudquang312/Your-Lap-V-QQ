@@ -4,12 +4,15 @@ async function loadUserDetail() {
     const getData = await axios.get(`http://localhost:3001/api/v1/users/${userId}`);
     const userDetail = getData.data.user;
     console.log(userDetail);
-    $('#inputIdPr').val(userDetail._id);
-    $('#inputNamePr').val(userDetail.fullname);
-    $('#inputEmail3').val(userDetail.dateOfBirth.slice(0, 10));
-    $('#inputPhoneNumber').val(userDetail.phoneNumber);
-    $('#inputAddress').val(userDetail.address);
+    $('#cusID').val(userDetail._id);
+    $('#inputNamePr').val(userDetail.fullname ? userDetail.fullname : '');
+    $('#inputEmail3').val(userDetail.dateOfBirth ? userDetail.dateOfBirth.slice(0, 10) : '');
+    $('#inputPhoneNumber').val(userDetail.phoneNumber ? userDetail.phoneNumber : '');
+    $('#inputAddress').val(userDetail.address ? userDetail.address : '');
     $('#inputDateRegister').val(userDetail.createdAt.slice(0, 10));
+    $('#male').checked = false;
+    $('#female').checked = false;
+    userDetail.gender ? userDetail.gender == 'Nam' ? $('#male').checked = true : $('#female').checked = true : $('#male').checked = true;
 }
 $(document).ready(function () {
     loadUserDetail();
@@ -19,7 +22,7 @@ $(document).ready(function () {
         axios.put(`http://localhost:3001/api/v1/users/${userId}`, {
             fullname: $('#inputNamePr').val(),
             dateOfBirth: $('#inputEmail3').val(),
-            gender: $('#inputSex').val() == "option1" ? 'Nam' : 'Nữ',//? chua lay dc gioi tinh
+            gender: $('#male').is(':checked') ? 'Nam' : 'Nữ',//? chua lay dc gioi tinh
             phoneNumber: $('#inputPhoneNumber').val(),
             address: $('#inputAddress').val()
         }).then(res => {

@@ -41,7 +41,7 @@ async function loadTypeProductList() {
                 </td>
                 <td>
                     <div class="btn btn-primary pull-right view-${pt._id}">
-                        Sửa
+                        Xem
                     </div>
                 </td>
                 <td>

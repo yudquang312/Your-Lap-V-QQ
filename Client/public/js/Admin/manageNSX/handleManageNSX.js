@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    loadNSXList();
+  loadNSXList();
 })
 
 async function loadNSXList() {
-    const getDataNSX = await axios.get(`http://localhost:3001/api/v1/nsx`);
-    const NSXs = getDataNSX.data.listNSX;
-    $('tbody').empty().append(
-        `<tr class="heading typeproduc">
+  const getDataNSX = await axios.get(`http://localhost:3001/api/v1/nsx`);
+  const NSXs = getDataNSX.data.listNSX;
+  $('tbody').empty().append(
+    `<tr class="heading typeproduc">
         <td class="cell-time align-right">
           <!-- <input type="checkbox" class="inbox-checkbox checkbox2"> -->
         </td>
@@ -20,21 +20,17 @@ async function loadNSXList() {
           Quốc gia
         </td>
         <td>
-          <div class="pull-right">
-            <a href="producerDetails.html" class="btn btn-primary">Sửa</a>
-          </div>
+          
         </td>
         <td>
-          <div class="pull-right">
-            <a href="#" class="btn btn-primary">Xoá</a>
-          </div>
+          
         </td>
 
       </tr>`
-    );
-    NSXs.forEach(nsx => {
-        $('tbody').append(
-            `<tr class='unread'>
+  );
+  NSXs.forEach(nsx => {
+    $('tbody').append(
+      `<tr class='unread'>
                 <td class='cell-check'>
                 </td>
                 <td class='cell-check'>
@@ -48,7 +44,7 @@ async function loadNSXList() {
                 </td>
                 <td>
                     <div class="btn btn-primary pull-right view-${nsx._id}">
-                        Sửa
+                        Xem
                     </div>
                 </td>
                 <td>
@@ -57,15 +53,15 @@ async function loadNSXList() {
                     </div>
                 </td>
             </tr>`
-        )
-        $(`.view-${nsx._id}`).click(() => {
-            redirect(`producerDetails.html?id=${nsx._id}`)
-        });
-        $(`.delete-${nsx._id}`).click(() => {
-            axios.delete(`http://localhost:3001/api/v1/nsx/${nsx._id}`)
-                .then(res => {
-                    if (res.status === 200 && alert(res.data.message));
-                });
-        })
+    )
+    $(`.view-${nsx._id}`).click(() => {
+      redirect(`producerDetails.html?id=${nsx._id}`)
     });
+    $(`.delete-${nsx._id}`).click(() => {
+      axios.delete(`http://localhost:3001/api/v1/nsx/${nsx._id}`)
+        .then(res => {
+          if (res.status === 200 && alert(res.data.message));
+        });
+    })
+  });
 }
