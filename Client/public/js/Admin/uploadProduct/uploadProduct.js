@@ -3,14 +3,14 @@ $(document).ready(function () {
         event.preventDefault();
         axios.post(`http://localhost:3001/api/v1/products`, {
             name: $('#name').val(),
-            typeProduct: $('#typeProduct selectt').val(),
-            NSX: $('#NSX selectt').val(),
+            typeProduct: $('select[name="typeProduct"]').val(),
+            NSX: $('select[name="NSX"]').val(),
             amount: $('#amount').val(),
             entryPrice: $('#entryPrice').val(),
-            price: $('#price').val(),
-            promotion: $('#promotion').val()
+            price: $('#price').val()
         }).then(res => {
-            if (res.status === 200 && alert('Thêm sản phẩm thành công'));
+            console.log(res);
+            alert(res.data.message);
         });
     })
 })

@@ -65,11 +65,12 @@ async function loadUserList() {
         $(`.view-${user._id}`).click(() => {
             redirect(`userDetail.html?id=${user._id}`)
         });
-        $(`.delete-${user._id}`).click(() => {
-            axios.delete(`http://localhost:3001/api/v1/users/${user._id}`)
+        $(`.delete-${user._id}`).click(async () => {
+            await axios.delete(`http://localhost:3001/api/v1/users/${user._id}`)
                 .then(res => {
-                    if (res.status === 200 && alert(res.data.message));
+                    alert(res.data.message);
                 });
+            location.reload(true);
         });
     });
 }

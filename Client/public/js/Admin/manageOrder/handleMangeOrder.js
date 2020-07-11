@@ -66,13 +66,21 @@ async function loadOrderList() {
             </tr>`
         )
         $(`.view-${order._id}`).click(() => {
+            // console.log(ordersDetail.find(orderDetail => orderDetail.order._id == order._id)._id);
             redirect(`orderDetails.html?id=${order._id}`)
         });
-        $(`.delete-${order._id}`).click(() => {
-            axios.delete(`http://localhost:3001/api/v1/order/${order._id}`)
+        $(`.delete-${order._id}`).click(async () => {
+            await axios.delete(`http://localhost:3001/api/v1/order/${order._id}`)
                 .then(res => {
-                    if (res.status === 200 && alert(res.data.message));
+                    console.log(res);
+                    alert(res.data.message);
                 });
+            await axios.delete(`http://localhost:3001/api/v1/orderdetail/${ordersDetail.find(orderDetail => orderDetail.order._id == order._id)._id}`)
+                .then(res => {
+                    console.log(res);
+                    alert(res.data.message);
+                });
+            location.reload(true);
         })
     });
 }

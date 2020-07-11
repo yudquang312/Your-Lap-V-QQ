@@ -138,21 +138,21 @@ const getAllProducts = async (req, res, next) => {
     }
 }
 const createProduct = async (req, res, next) => {
-    const uploader = async (path) => await cloudinary.uploads(path, 'Images');
+    // const uploader = async (path) => await cloudinary.uploads(path, 'Images');
     try {
-        const urls = [];
-        console.log("res", req.body.images)
-        const files = req.files;
-        for (const file of files) {
-            const { path } = file;
-            const newPath = await uploader(path);
+        //     const urls = [];
+        //     console.log("res", req.body.images)
+        //     const files = req.files;
+        //     for (const file of files) {
+        //         const { path } = file;
+        //         const newPath = await uploader(path);
 
-            urls.push(newPath);
-            fs.unlinkSync(path);
-        }
+        //         urls.push(newPath);
+        //         fs.unlinkSync(path);
+        //     }
         // console.log(req.files);
         const data = req.body;
-        data.images = urls;
+        // data.images = urls;
         // req.files.forEach(img => {
         //     data.images.push(img.filename);
         // });
@@ -161,9 +161,10 @@ const createProduct = async (req, res, next) => {
         // const hashPassword = bcrypt.hashSync(data.password, salt);
         // data.password = hashPassword;
         console.log(data);
-        data.price = +data.price;
-        data.entryPrice = +data.entryPrice;
-        data.postBy = req.user._id;
+        data.amount = data.amount ? +data.amount : 0;
+        data.price = data.price ? +data.price : 0;
+        data.entryPrice = data.entryPrice ? +data.entryPrice : 0;
+        // data.postBy = req.user._id;
         const existedNSX = await NSX.findOne({ _id: data.NSX });
         if (!existedNSX) {
             return new Error('NSX NOT FOUND')

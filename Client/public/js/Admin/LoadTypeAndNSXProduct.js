@@ -11,15 +11,17 @@ async function loadTypeProduct() {
         $('select[name="typeProduct"]').append(`
             <option value="${pt._id}">${pt.name}</option>
         `)
+        console.log(pt._id, pt.name);
     })
 }
 async function loadNSX() {
     $('select[name="NSX"]').html(`<option value="0">Chọn mã nhà sản xuất</option>`)
     const nsx = await axios.get('http://localhost:3001/api/v1/nsx');
-    console.log(nsx.data.listPT)
+    console.log(nsx, nsx.data.listNSX);
     nsx.data.listNSX.forEach((pt) => {
         $('select[name="NSX"]').append(`
             <option value="${pt._id}">${pt.name}</option>
         `)
+        console.log(pt._id, pt.name);
     })
 }

@@ -11,10 +11,10 @@ async function loadTypeProductList() {
           <!-- <input type="checkbox" class="inbox-checkbox checkbox2"> -->
         </td>
         <td class="cell-check">
-          Mã sản phẩm
+          Mã loại sản phẩm
         </td>
         <td class="cell-icon">
-          Tên sản phẩm
+          Tên loại sản phẩm
         </td>
         <!-- <td class="cell-author hidden-phone hidden-tablet">
                                 Mã kho
@@ -54,11 +54,12 @@ async function loadTypeProductList() {
         $(`.view-${pt._id}`).click(() => {
             redirect(`typrProductDetails.html?id=${pt._id}`)
         });
-        $(`.delete-${pt._id}`).click(() => {
-            axios.delete(`http://localhost:3001/api/v1/type_product/${pt._id}`)
+        $(`.delete-${pt._id}`).click(async () => {
+            await axios.delete(`http://localhost:3001/api/v1/type_product/${pt._id}`)
                 .then(res => {
-                    if (res.status === 200 && alert(res.data.message));
+                    alert(res.data.message);
                 });
+            location.reload(true);
         });
     });
 }

@@ -37,7 +37,7 @@ $(document).ready(function () {
             NSX: $('#producerIDUp').val(),
             typeProduct: $('#typeProductIDUp').val()
         }).then(res => {
-            if (res.status === 200 && alert(res.data.message));
+            alert(res.data.message);
         });
     })
 });

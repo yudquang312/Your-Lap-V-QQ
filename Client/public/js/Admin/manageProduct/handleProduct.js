@@ -73,11 +73,12 @@ async function loadProductList() {
         $(`.view-${product._id}`).click(() => {
             redirect(`productDetails.html?id=${product._id}`)
         });
-        $(`.delete-${product._id}`).click(() => {
-            axios.delete(`http://localhost:3001/api/v1/products/${product._id}`)
+        $(`.delete-${product._id}`).click(async () => {
+            await axios.delete(`http://localhost:3001/api/v1/products/${product._id}`)
                 .then(res => {
                     if (res.status === 200 && alert(res.data.message));
                 });
+            location.reload(true);
         });
     });
 }
