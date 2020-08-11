@@ -1,22 +1,30 @@
-const Product = require('../models/products');
-const _ = require('lodash');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt-nodejs');
-const NSX = require('../models/NSX');
-const ProductType = require('../models/productType')
-const cloudinary = require('../helper/cloudinary');
-const fs = require('fs')
+const Product = require("../models/products");
+const _ = require("lodash");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt-nodejs");
+const NSX = require("../models/NSX");
+const ProductType = require("../models/productType");
+const cloudinary = require("../helper/cloudinary");
+const fs = require("fs");
 
 const deleteProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const productDelete = await Product.findOne({ _id: id, deleteAt: undefined }).lean();
+        const productDelete = await Product.findOne({
+            _id: id,
+            deleteAt: undefined,
+        }).lean();
         if (!productDelete) {
-            return next(new Error('PRODUCT_NOT_FOUND'));
+            return res.status(200).json({
+                message: "Product not found",
+            });
         }
-        await Product.updateOne({ _id: id }, { $set: { deleteAt: new Date() } });
+        await Product.updateOne(
+            { _id: id },
+            { $set: { deleteAt: new Date() } }
+        );
         return res.status(200).json({
-            message: 'delete product successful',
+            message: "Deleted",
         });
     } catch (e) {
         next(e);
@@ -27,18 +35,23 @@ const chaneAmount = async (req) => {
         const { id, amount } = req;
         // const data = req.body;
         // _.omitBy(data, _.isNull);
-        const existedOrder = await Product.findOne({ _id: id, deleteAt: undefined });
+        const existedOrder = await Product.findOne({
+            _id: id,
+            deleteAt: undefined,
+        });
         if (!existedOrder) {
-            return next(new Error('PRODUCT_NOT_FOUND'));
+            return next(new Error("PRODUCT_NOT_FOUND"));
         }
         // const updateInfo = { $set: data };
-        const orderUpdate = await Product.updateOne({ _id: id, deleteAt: undefined }, { $set: { "amount": parseInt(existedOrder[0].amount) - amount } })
+        const orderUpdate = await Product.updateOne(
+            { _id: id, deleteAt: undefined },
+            { $set: { amount: parseInt(existedOrder[0].amount) - amount } }
+        );
         return res.status(200).json({
-            message: 'update successful',
+            message: "update successful",
             data: orderUpdate,
-            data_update: updateInfo
+            data_update: updateInfo,
         });
-
     } catch (e) {
         return next(e);
     }
@@ -46,45 +59,44 @@ const chaneAmount = async (req) => {
 const getProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const product = await Product.findOne({ _id: id, deleteAt: undefined }).lean().populate(
-            {
-                path: 'postBy',
-                select: 'fullname'
-            }
-        ).populate(
-            {
-                path: 'typeProduct',
-                select: 'name'
-            }
-        ).populate(
-            {
-                path: 'NSX',
-                select: 'name'
-            }
-        );
-        if (!product) return next(new Error('PRODUCT_NOT_FOUND'));
+        const product = await Product.findOne({ _id: id, deleteAt: undefined })
+            .lean()
+            .populate({
+                path: "postBy",
+                select: "fullname",
+            })
+            .populate({
+                path: "typeProduct",
+                select: "name",
+            })
+            .populate({
+                path: "NSX",
+                select: "name",
+            });
+        if (!product)
+            return res.status(200).json({
+                message: "Product not found",
+            });
         return res.status(200).json({
-            message: 'Product',
-            product
-        })
+            message: "Product",
+            product,
+        });
     } catch (e) {
         next(e);
     }
-}
+};
 
 const getAllProducts = async (req, res, next) => {
     try {
         let { date, price, search, page, limit, amount } = req.query;
         if (!page) {
             page = 0;
-        }
-        else {
-            page = parseInt(page)
+        } else {
+            page = parseInt(page);
         }
         if (!limit) {
             limit = 0;
-        }
-        else {
+        } else {
             limit = parseInt(limit);
         }
         let sort, skip;
@@ -94,49 +106,44 @@ const getAllProducts = async (req, res, next) => {
         if (date) {
             sort = {
                 createdAt: date === "true" ? 1 : -1,
-            }
+            };
         }
         if (amount) {
             sort = {
                 amount: amount === "true" ? 1 : -1,
-            }
+            };
         }
         if (price) {
             sort = {
                 price: price === "true" ? 1 : -1,
-            }
+            };
         }
-        let ListProducts = await Product
-            .find({ deleteAt: undefined })
+        let ListProducts = await Product.find({ deleteAt: undefined })
             .lean()
-            .populate(
-                {
-                    path: 'postBy',
-                    select: 'fullname'
-                }
-            ).populate(
-                {
-                    path: 'typeProduct NSX',
-                    select: 'name nation'
-                }
-            ).sort(
-                sort
-            )
+            .populate({
+                path: "postBy",
+                select: "fullname",
+            })
+            .populate({
+                path: "typeProduct NSX",
+                select: "name nation",
+            })
+            .sort(sort)
             .limit(limit)
             .skip(skip);
         if (search) {
             ListProducts = ListProducts.filter((pd) => {
                 return pd.name.toLowerCase().includes(search.toLowerCase());
-            })
+            });
         }
         return res.status(200).json({
-            message: 'ListProducts',
-            data: ListProducts
-        })
+            message: "ListProducts",
+            data: ListProducts,
+        });
     } catch (e) {
-        next(e)
+        next(e);
     }
-}
+};
 const createProduct = async (req, res, next) => {
     // const uploader = async (path) => await cloudinary.uploads(path, 'Images');
     try {
@@ -167,22 +174,28 @@ const createProduct = async (req, res, next) => {
         // data.postBy = req.user._id;
         const existedNSX = await NSX.findOne({ _id: data.NSX });
         if (!existedNSX) {
-            return new Error('NSX NOT FOUND')
+            return res.status(200).json({
+                message: "NSX not found",
+            });
         }
-        const existedTypeProduct = await ProductType.findOne({ _id: data.typeProduct });
+        const existedTypeProduct = await ProductType.findOne({
+            _id: data.typeProduct,
+        });
         if (!existedTypeProduct) {
-            return new Error('Type Product NOT FOUND')
+            return res.status(200).json({
+                message: "Product type not found",
+            });
         }
         const createdProduct = await Product.create(data);
-        return res.status(201).json({
-            message: "create product successfully",
-            createdProduct
+        return res.status(200).json({
+            message: "Created",
+            createdProduct,
         });
         // return res.location('http://localhost:3000/uploadProduct.html')
     } catch (e) {
         next(e);
     }
-}
+};
 
 const updateProduct = async (req, res, next) => {
     try {
@@ -191,13 +204,15 @@ const updateProduct = async (req, res, next) => {
         if (data.NSX) {
             const existedNSX = await NSX.findOne({ _id: data.NSX });
             if (!existedNSX) {
-                return new Error('NSX NOT FOUND')
+                return new Error("NSX NOT FOUND");
             }
         }
         if (data.typeProduct) {
-            const existedTypeProduct = await ProductType.findOne({ _id: data.typeProduct });
+            const existedTypeProduct = await ProductType.findOne({
+                _id: data.typeProduct,
+            });
             if (!existedTypeProduct) {
-                return new Error('Type Product NOT FOUND')
+                return new Error("Type Product NOT FOUND");
             }
         }
         // const salt = bcrypt.genSaltSync(2);
@@ -206,19 +221,24 @@ const updateProduct = async (req, res, next) => {
         _.omitBy(data, _.isNull);
         const existedProduct = await Product.findOne({ _id: id });
         if (!existedProduct) {
-            return next(new Error('USER_NOT_FOUND'));
+            return res.status(200).json({
+                message: "Product not found",
+            });
         }
         const updateInfo = { $set: data };
-        const productUpdate = await Product.findOneAndUpdate({ _id: id, deleteAt: undefined }, updateInfo, {
-            new: true
-        }).lean();
+        const productUpdate = await Product.findOneAndUpdate(
+            { _id: id, deleteAt: undefined },
+            updateInfo,
+            {
+                new: true,
+            }
+        ).lean();
 
         return res.status(200).json({
-            message: 'update successful',
+            message: "Updated",
             data: productUpdate,
-            data_update: updateInfo
+            data_update: updateInfo,
         });
-
     } catch (e) {
         return next(e);
     }
@@ -230,52 +250,53 @@ const getProductByType = async (req, res, next) => {
     let skip;
     if (!page) {
         page = 0;
-    }
-    else {
-        page = parseInt(page)
+    } else {
+        page = parseInt(page);
     }
     if (!limit) {
         limit = 0;
-    }
-    else {
+    } else {
         limit = parseInt(limit);
     }
     if (page) {
         skip = (page - 1) * limit;
     }
-    const products = await Product.find({ typeProduct: id, deleteAt: undefined }).lean().populate(
-        {
-            path: 'postBy',
-            select: 'fullname'
-        }
-    ).populate(
-        {
-            path: 'typeProduct NSX',
-            select: 'name nation'
-        }
-    ).limit(limit).skip(skip);
+    const products = await Product.find({
+        typeProduct: id,
+        deleteAt: undefined,
+    })
+        .lean()
+        .populate({
+            path: "postBy",
+            select: "fullname",
+        })
+        .populate({
+            path: "typeProduct NSX",
+            select: "name nation",
+        })
+        .limit(limit)
+        .skip(skip);
     if (!products) {
         return next(new Error("TYPE_PRODUCT_IS_NOT_EXISTED"));
     }
     return res.status(200).json({
-        message: 'List Product By Type',
+        message: "List Product By Type",
         data: products,
     });
-}
+};
 const getProductWithDate = async (req, res, next) => {
     const { check } = req.body;
-    console.log(req)
-    const products = await Product.find({ deleteAt: undefined }).lean().populate(
-        {
-            path: 'postBy',
-            select: 'fullname'
-        }
-    ).populate(
-        {
-            path: 'typeProduct NSX',
-            select: 'name nation'
-        }
-    )
+    console.log(req);
+    const products = await Product.find({ deleteAt: undefined })
+        .lean()
+        .populate({
+            path: "postBy",
+            select: "fullname",
+        })
+        .populate({
+            path: "typeProduct NSX",
+            select: "name nation",
+        });
     // .sort({
     //     createdAt: check? 1: -1
     // });
@@ -283,10 +304,10 @@ const getProductWithDate = async (req, res, next) => {
         return next(new Error("TYPE_PRODUCT_IS_NOT_EXISTED"));
     }
     return res.status(200).json({
-        message: 'List Product By Type',
+        message: "List Product By Type",
         data: products,
     });
-}
+};
 
 module.exports = {
     getProduct,
@@ -295,5 +316,5 @@ module.exports = {
     updateProduct,
     deleteProduct,
     getProductByType,
-    getProductWithDate
-}
+    getProductWithDate,
+};

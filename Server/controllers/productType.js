@@ -1,18 +1,26 @@
-const ProductType = require('../models/productType');
-const _ = require('lodash');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt-nodejs');
+const ProductType = require("../models/productType");
+const _ = require("lodash");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt-nodejs");
 
 const deletePT = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const PTDelete = await ProductType.findOne({ _id: id, deleteAt: undefined }).lean();
+        const PTDelete = await ProductType.findOne({
+            _id: id,
+            deleteAt: undefined,
+        }).lean();
         if (!PTDelete) {
-            return next(new Error('PRODUCT_TYPE_NOT_FOUND'));
+            return res.status(200).json({
+                message: "Product type not found",
+            });
         }
-        await ProductType.updateOne({ _id: id }, { $set: { deleteAt: new Date() } });
+        await ProductType.updateOne(
+            { _id: id },
+            { $set: { deleteAt: new Date() } }
+        );
         return res.status(200).json({
-            message: 'delete product type successful',
+            message: "Delete",
         });
     } catch (e) {
         next(e);
@@ -22,40 +30,46 @@ const deletePT = async (req, res, next) => {
 const getPT = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const pt = await ProductType.findOne({ _id: id, deleteAt: undefined }).lean();
-        if (!pt) return next(new Error('PRODUCT_TYPE_NOT_FOUND'));
+        const pt = await ProductType.findOne({
+            _id: id,
+            deleteAt: undefined,
+        }).lean();
+        if (!pt)
+            return res.status(200).json({
+                message: "Product not found",
+            });
         return res.status(200).json({
-            message: 'PRODUCT_TYPE',
-            pt
-        })
+            message: "PRODUCT_TYPE",
+            pt,
+        });
     } catch (e) {
         next(e);
     }
-}
+};
 
 const getAllPT = async (req, res, next) => {
     try {
         const listPT = await ProductType.find({ deleteAt: undefined }).lean();
         return res.status(200).json({
-            message: 'List Product Type',
-            listPT
-        })
+            message: "List Product Type",
+            listPT,
+        });
     } catch (e) {
-        next(e)
+        next(e);
     }
-}
+};
 const createPT = async (req, res, next) => {
     try {
         const data = req.body;
         const createdPT = await ProductType.create(data);
         return res.status(200).json({
-            message: "create product type successfully",
-            createdPT
+            message: "Created",
+            createdPT,
         });
     } catch (e) {
         next(e);
     }
-}
+};
 
 const updatePT = async (req, res, next) => {
     try {
@@ -63,21 +77,26 @@ const updatePT = async (req, res, next) => {
         const data = req.body;
         _.omitBy(data, _.isNull);
         const existedPT = await ProductType.findOne({ _id: id });
-        console.log('checktontai', existedPT)
+        // console.log('checktontai', existedPT)
         if (!existedPT) {
-            return next(new Error('ProductType_NOT_FOUND'));
+            return res.status(200).json({
+                message: "Product not found",
+            });
         }
         const updateInfo = { $set: data };
-        const PTUpdate = await ProductType.findOneAndUpdate({ _id: id, deleteAt: undefined }, updateInfo, {
-            new: true
-        }).lean();
+        const PTUpdate = await ProductType.findOneAndUpdate(
+            { _id: id, deleteAt: undefined },
+            updateInfo,
+            {
+                new: true,
+            }
+        ).lean();
 
         return res.status(200).json({
-            message: 'update successful',
+            message: "Updated",
             data: PTUpdate,
-            data_update: updateInfo
+            data_update: updateInfo,
         });
-
     } catch (e) {
         return next(e);
     }
@@ -88,5 +107,5 @@ module.exports = {
     getAllPT,
     getPT,
     createPT,
-    updatePT
-}
+    updatePT,
+};
